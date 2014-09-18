@@ -1648,7 +1648,8 @@ CREATE TABLE `PartIndex` (
   `partIndexID` bigint(20) NOT NULL AUTO_INCREMENT,
   `partID` int(11) NOT NULL,
   `partIndex` longtext,
-  PRIMARY KEY (`partIndexID`)
+  PRIMARY KEY (`partIndexID`),
+  FULLTEXT KEY `partIndex` (`partIndex`)
 ) ENGINE=MyISAM AUTO_INCREMENT=84240 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
