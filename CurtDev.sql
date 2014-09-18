@@ -14,6 +14,8 @@
  Date: 09/18/2014 11:07:06 AM
 */
 
+CREATE DATABASE IF NOT EXISTS CurtDev;
+
 SET NAMES utf8;
 SET FOREIGN_KEY_CHECKS = 0;
 
@@ -25,7 +27,7 @@ CREATE TABLE `AcesType` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `ActivatedWarranties`
@@ -41,7 +43,7 @@ CREATE TABLE `ActivatedWarranties` (
   PRIMARY KEY (`id`),
   KEY `Part_FK` (`part`),
   CONSTRAINT `Part_FK` FOREIGN KEY (`part`) REFERENCES `Part` (`partID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='Warranty Activation';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `ApiAccess`
@@ -55,7 +57,7 @@ CREATE TABLE `ApiAccess` (
   KEY `key_id` (`key_id`),
   KEY `key_id_2` (`key_id`),
   CONSTRAINT `FK_ApiKey` FOREIGN KEY (`key_id`) REFERENCES `ApiKey` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `ApiKey`
@@ -72,7 +74,7 @@ CREATE TABLE `ApiKey` (
   KEY `FK__ApiKey__user_id__5BE23F2F` (`user_id`),
   CONSTRAINT `FK__ApiKey__type_id__5AEE1AF6` FOREIGN KEY (`type_id`) REFERENCES `ApiKeyType` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK__ApiKey__user_id__5BE23F2F` FOREIGN KEY (`user_id`) REFERENCES `CustomerUser` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4195 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=4195 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `ApiKeyType`
@@ -84,7 +86,7 @@ CREATE TABLE `ApiKeyType` (
   `date_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `ApiModules`
@@ -97,7 +99,7 @@ CREATE TABLE `ApiModules` (
   `date_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `AuthAccess`
@@ -113,7 +115,7 @@ CREATE TABLE `AuthAccess` (
   KEY `authArea_ref_idx` (`AreaID`),
   KEY `custUser_ref_idx` (`userID`),
   CONSTRAINT `custUserAuthAccess_ref` FOREIGN KEY (`userID`) REFERENCES `CustomerUser` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `AuthAreas`
@@ -129,7 +131,7 @@ CREATE TABLE `AuthAreas` (
   UNIQUE KEY `id` (`id`),
   KEY `authDomain_ref_idx` (`DomainID`),
   CONSTRAINT `authDomains` FOREIGN KEY (`DomainID`) REFERENCES `AuthDomains` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `AuthDomains`
@@ -141,7 +143,7 @@ CREATE TABLE `AuthDomains` (
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `AuthorizedTracking`
@@ -155,7 +157,7 @@ CREATE TABLE `AuthorizedTracking` (
   `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `date_modified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `Authors`
@@ -168,7 +170,7 @@ CREATE TABLE `Authors` (
   `email` varchar(510) DEFAULT NULL,
   `active` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`authorID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `Banners`
@@ -182,7 +184,7 @@ CREATE TABLE `Banners` (
   `ends` datetime DEFAULT NULL,
   `path` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`bannerID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `BaseVehicle`
@@ -202,7 +204,7 @@ CREATE TABLE `BaseVehicle` (
   CONSTRAINT `FK_BaseVehicle_Year` FOREIGN KEY (`YearID`) REFERENCES `vcdb_Year` (`YearID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK__BaseVehic__MakeI__75B5891D` FOREIGN KEY (`MakeID`) REFERENCES `vcdb_Make` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK__BaseVehic__Model__76A9AD56` FOREIGN KEY (`ModelID`) REFERENCES `vcdb_Model` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=22856 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=22856 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `BlogCategories`
@@ -214,7 +216,7 @@ CREATE TABLE `BlogCategories` (
   `slug` varchar(255) DEFAULT NULL,
   `active` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`blogCategoryID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `BlogPost_BlogCategory`
@@ -229,7 +231,7 @@ CREATE TABLE `BlogPost_BlogCategory` (
   KEY `FK__BlogPost___blogP__58D1301D` (`blogPostID`),
   CONSTRAINT `FK__BlogPost___blogC__57DD0BE4` FOREIGN KEY (`blogCategoryID`) REFERENCES `BlogCategories` (`blogCategoryID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK__BlogPost___blogP__58D1301D` FOREIGN KEY (`blogPostID`) REFERENCES `BlogPosts` (`blogPostID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `BlogPosts`
@@ -251,7 +253,7 @@ CREATE TABLE `BlogPosts` (
   `thumbnail` varchar(255) NOT NULL,
   PRIMARY KEY (`blogPostID`),
   KEY `BlogPostAuthorID` (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `Brand`
@@ -262,7 +264,7 @@ CREATE TABLE `Brand` (
   `name` varchar(255) NOT NULL,
   `code` varchar(255) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `BrandPart`
@@ -276,7 +278,7 @@ CREATE TABLE `BrandPart` (
   `interchangeType` char(1) NOT NULL,
   `dateAdded` datetime NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `BusinessClass`
@@ -288,7 +290,7 @@ CREATE TABLE `BusinessClass` (
   `sort` int(11) NOT NULL,
   `showOnWebsite` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`BusinessClassID`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `Cabelas`
@@ -299,7 +301,7 @@ CREATE TABLE `Cabelas` (
   `priceCode` int(11) DEFAULT NULL,
   `cabelasPart` varchar(50) NOT NULL,
   PRIMARY KEY (`cabelasID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `CartIntegration`
@@ -312,7 +314,7 @@ CREATE TABLE `CartIntegration` (
   `custID` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`referenceID`),
   KEY `partID` (`partID`)
-) ENGINE=InnoDB AUTO_INCREMENT=80039 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=80039 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `CatPart`
@@ -327,7 +329,7 @@ CREATE TABLE `CatPart` (
   KEY `FK__CatPart__partID__54945AAA` (`partID`),
   CONSTRAINT `FK__CatPart__catID__55887EE3` FOREIGN KEY (`catID`) REFERENCES `Categories` (`catID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK__CatPart__partID__54945AAA` FOREIGN KEY (`partID`) REFERENCES `Part` (`partID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5722 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=5722 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `Categories`
@@ -353,7 +355,7 @@ CREATE TABLE `Categories` (
   PRIMARY KEY (`catID`),
   KEY `IX_Categories_ParentID` (`parentID`),
   KEY `IX_Categories_Sort` (`sort`)
-) ENGINE=InnoDB AUTO_INCREMENT=290 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=290 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `CategoryVideo`
@@ -364,7 +366,7 @@ CREATE TABLE `CategoryVideo` (
   `videoID` varchar(45) NOT NULL,
   `catID` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `CdnFile`
@@ -381,7 +383,7 @@ CREATE TABLE `CdnFile` (
   `objectName` varchar(255) DEFAULT NULL,
   `fileSize` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `CdnFileType`
@@ -393,7 +395,7 @@ CREATE TABLE `CdnFileType` (
   `title` varchar(255) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `Channel`
@@ -410,7 +412,7 @@ CREATE TABLE `Channel` (
   `title` varchar(255) DEFAULT NULL,
   `desc` text,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=191 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=191 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `ChannelType`
@@ -421,7 +423,7 @@ CREATE TABLE `ChannelType` (
   `name` varchar(255) NOT NULL,
   `description` text,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `Class`
@@ -432,7 +434,7 @@ CREATE TABLE `Class` (
   `class` varchar(255) DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`classID`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `ColorCode`
@@ -442,7 +444,7 @@ CREATE TABLE `ColorCode` (
   `codeID` int(11) NOT NULL,
   `code` varchar(100) DEFAULT NULL,
   `font` varchar(100) NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `Comments`
@@ -460,7 +462,7 @@ CREATE TABLE `Comments` (
   PRIMARY KEY (`commentID`),
   KEY `FK__Comments__blogPo__56E8E7AB` (`blogPostID`),
   CONSTRAINT `FK__Comments__blogPo__56E8E7AB` FOREIGN KEY (`blogPostID`) REFERENCES `BlogPosts` (`blogPostID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `Company`
@@ -485,7 +487,7 @@ CREATE TABLE `Company` (
   `moderate_blog` tinyint(1) NOT NULL DEFAULT '0',
   `stylesheet` varchar(200) NOT NULL DEFAULT 'light_layout.css',
   PRIMARY KEY (`companyID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `ConfigAttribute`
@@ -500,7 +502,7 @@ CREATE TABLE `ConfigAttribute` (
   PRIMARY KEY (`ID`),
   KEY `AAIA_ConfigAttribute_IX` (`ConfigAttributeTypeID`,`parentID`),
   CONSTRAINT `FK__ConfigAtt__Confi__07D43958` FOREIGN KEY (`ConfigAttributeTypeID`) REFERENCES `ConfigAttributeType` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=378 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=378 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `ConfigAttributeType`
@@ -514,7 +516,7 @@ CREATE TABLE `ConfigAttributeType` (
   PRIMARY KEY (`ID`),
   KEY `FK__ConfigAtt__AcesT__030F843B` (`AcesTypeID`),
   CONSTRAINT `FK__ConfigAtt__AcesT__030F843B` FOREIGN KEY (`AcesTypeID`) REFERENCES `AcesType` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `Contact`
@@ -537,7 +539,7 @@ CREATE TABLE `Contact` (
   `postalcode` varchar(20) DEFAULT NULL,
   `country` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`contactID`)
-) ENGINE=InnoDB AUTO_INCREMENT=15147 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=15147 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `ContactReceiver`
@@ -549,7 +551,7 @@ CREATE TABLE `ContactReceiver` (
   `last_name` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`contactReceiverID`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `ContactReceiver_ContactType`
@@ -564,7 +566,7 @@ CREATE TABLE `ContactReceiver_ContactType` (
   KEY `FK__ContactRe__conta__70A8B9AE` (`contactTypeID`),
   CONSTRAINT `FK__ContactRe__conta__6FB49575` FOREIGN KEY (`contactReceiverID`) REFERENCES `ContactReceiver` (`contactReceiverID`) ON DELETE CASCADE,
   CONSTRAINT `FK__ContactRe__conta__70A8B9AE` FOREIGN KEY (`contactTypeID`) REFERENCES `ContactType` (`contactTypeID`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=114 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=114 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `ContactType`
@@ -574,7 +576,7 @@ CREATE TABLE `ContactType` (
   `contactTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`contactTypeID`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `Content`
@@ -589,7 +591,7 @@ CREATE TABLE `Content` (
   PRIMARY KEY (`contentID`),
   KEY `FK__Content__cTypeID__0B457116` (`cTypeID`),
   CONSTRAINT `FK__Content__cTypeID__0B457116` FOREIGN KEY (`cTypeID`) REFERENCES `ContentType` (`cTypeID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=300800 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=300800 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `ContentBridge`
@@ -607,7 +609,7 @@ CREATE TABLE `ContentBridge` (
   CONSTRAINT `FK__ContentBr__catID__3A005FFF` FOREIGN KEY (`catID`) REFERENCES `Categories` (`catID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK__ContentBr__conte__390C3BC6` FOREIGN KEY (`contentID`) REFERENCES `Content` (`contentID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK__ContentBr__partI__3AF48438` FOREIGN KEY (`partID`) REFERENCES `Part` (`partID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=31453 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=31453 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `ContentType`
@@ -618,7 +620,7 @@ CREATE TABLE `ContentType` (
   `type` varchar(255) DEFAULT NULL,
   `allowHTML` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`cTypeID`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `Content_Revisions`
@@ -629,7 +631,7 @@ CREATE TABLE `Content_Revisions` (
   `userID` varchar(64) NOT NULL,
   `old_text` longtext,
   `new_text` longtext,
-  `date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `date` datetime NOT NULL,
   `changeType` enum('NEW','EDIT','DELETE') NOT NULL,
   `contentID` int(11) NOT NULL,
   `old_type` int(11) NOT NULL DEFAULT '0',
@@ -639,7 +641,7 @@ CREATE TABLE `Content_Revisions` (
   KEY `id_idx` (`contentID`),
   KEY `cTypeID_idx` (`old_type`),
   KEY `cTypeID_idx1` (`new_type`)
-) ENGINE=InnoDB AUTO_INCREMENT=467370 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='Revision History for CustomerContent';
+) ENGINE=InnoDB AUTO_INCREMENT=467370 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `Country`
@@ -650,7 +652,7 @@ CREATE TABLE `Country` (
   `name` varchar(255) DEFAULT NULL,
   `abbr` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`countryID`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `CustUserWebProperties`
@@ -665,7 +667,7 @@ CREATE TABLE `CustUserWebProperties` (
   KEY `custUser_ref_idx` (`userID`),
   CONSTRAINT `custUser_ref` FOREIGN KEY (`userID`) REFERENCES `CustomerUser` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `webProps_ref` FOREIGN KEY (`webPropID`) REFERENCES `WebProperties` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=231 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=231 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `Customer`
@@ -702,7 +704,7 @@ CREATE TABLE `Customer` (
   PRIMARY KEY (`cust_id`),
   KEY `CustomerCustomerID` (`customerID`),
   KEY `IX_CustomerID` (`customerID`)
-) ENGINE=InnoDB AUTO_INCREMENT=10443675 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=10443675 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `CustomerContent`
@@ -712,7 +714,7 @@ CREATE TABLE `CustomerContent` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `text` longtext NOT NULL,
   `custID` int(11) NOT NULL,
-  `added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `added` datetime NOT NULL,
   `modified` datetime NOT NULL,
   `userID` varchar(64) NOT NULL,
   `typeID` int(11) NOT NULL,
@@ -726,7 +728,7 @@ CREATE TABLE `CustomerContent` (
   CONSTRAINT `cTypeID` FOREIGN KEY (`typeID`) REFERENCES `ContentType` (`cTypeID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `cust_id` FOREIGN KEY (`custID`) REFERENCES `Customer` (`cust_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `id` FOREIGN KEY (`userID`) REFERENCES `CustomerUser` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='Customer Content';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `CustomerContentBridge`
@@ -739,7 +741,7 @@ CREATE TABLE `CustomerContentBridge` (
   `contentID` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_idx` (`contentID`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='Customer Content Bridge';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `CustomerContent_Revisions`
@@ -751,7 +753,7 @@ CREATE TABLE `CustomerContent_Revisions` (
   `custID` int(11) NOT NULL,
   `old_text` longtext,
   `new_text` longtext,
-  `date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `date` datetime NOT NULL,
   `changeType` enum('NEW','EDIT','DELETE') NOT NULL,
   `contentID` int(11) NOT NULL,
   `old_type` int(11) NOT NULL DEFAULT '0',
@@ -761,7 +763,7 @@ CREATE TABLE `CustomerContent_Revisions` (
   KEY `id_idx` (`contentID`),
   KEY `cTypeID_idx` (`old_type`),
   KEY `cTypeID_idx1` (`new_type`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='Revision History for CustomerContent';
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `CustomerCost`
@@ -773,7 +775,7 @@ CREATE TABLE `CustomerCost` (
   `partID` int(11) NOT NULL,
   `cost` decimal(18,2) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4599 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=4599 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `CustomerLoadsheetFields`
@@ -785,7 +787,7 @@ CREATE TABLE `CustomerLoadsheetFields` (
   `fieldID` int(11) NOT NULL,
   `displayOrder` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=373 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=373 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `CustomerLoadsheets`
@@ -796,7 +798,7 @@ CREATE TABLE `CustomerLoadsheets` (
   `cust_ID` int(11) NOT NULL,
   `name` varchar(150) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `CustomerLocations`
@@ -820,7 +822,7 @@ CREATE TABLE `CustomerLocations` (
   `ShippingDefault` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`locationID`),
   KEY `IX_CustomerLocations_Customer` (`cust_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8765 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=8765 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `CustomerPartAttributeFields`
@@ -830,12 +832,12 @@ CREATE TABLE `CustomerPartAttributeFields` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `field` varchar(255) DEFAULT NULL,
   `dataType` int(11) NOT NULL,
-  `added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `added` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `id_idx` (`dataType`),
   CONSTRAINT `datatype_id` FOREIGN KEY (`dataType`) REFERENCES `DataTypes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `CustomerPartAttributeValues`
@@ -844,10 +846,10 @@ DROP TABLE IF EXISTS `CustomerPartAttributeValues`;
 CREATE TABLE `CustomerPartAttributeValues` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `value` varchar(255) NOT NULL,
-  `added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `added` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `CustomerPartAttributes`
@@ -860,7 +862,7 @@ CREATE TABLE `CustomerPartAttributes` (
   `sort` int(11) NOT NULL,
   `custID` int(11) NOT NULL,
   `userID` varchar(64) NOT NULL,
-  `added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `added` datetime NOT NULL,
   `modified` datetime NOT NULL,
   `deleted` tinyint(1) unsigned zerofill NOT NULL,
   `partID` int(11) NOT NULL,
@@ -876,7 +878,7 @@ CREATE TABLE `CustomerPartAttributes` (
   CONSTRAINT `CustomerUser_id` FOREIGN KEY (`userID`) REFERENCES `CustomerUser` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `Customer_cust_id` FOREIGN KEY (`custID`) REFERENCES `Customer` (`cust_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `Part_partID` FOREIGN KEY (`partID`) REFERENCES `Part` (`partID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `CustomerPartAttributes_Revisions`
@@ -890,7 +892,7 @@ CREATE TABLE `CustomerPartAttributes_Revisions` (
   `new_field` int(11) NOT NULL,
   `old_value` int(11) NOT NULL,
   `new_value` int(11) NOT NULL,
-  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date` datetime NOT NULL,
   `changeType` enum('NEW','EDIT','DELETE') NOT NULL,
   `attributeID` int(11) NOT NULL,
   PRIMARY KEY (`id`),
@@ -909,7 +911,7 @@ CREATE TABLE `CustomerPartAttributes_Revisions` (
   CONSTRAINT `CustomerPartAttributeValues_Revisions_old_id` FOREIGN KEY (`old_value`) REFERENCES `CustomerPartAttributeValues` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `CustomerUser_Revisions_id` FOREIGN KEY (`userID`) REFERENCES `CustomerUser` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `Customer_Revisions_cust_id` FOREIGN KEY (`custID`) REFERENCES `Customer` (`cust_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `CustomerPricing`
@@ -925,7 +927,7 @@ CREATE TABLE `CustomerPricing` (
   `sale_end` date DEFAULT NULL,
   PRIMARY KEY (`cust_price_id`),
   KEY `partID` (`partID`)
-) ENGINE=InnoDB AUTO_INCREMENT=489577 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=489577 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `CustomerReport`
@@ -939,7 +941,7 @@ CREATE TABLE `CustomerReport` (
   PRIMARY KEY (`ID`),
   KEY `FK__CustomerR__Repor__0F604C87` (`ReportTypeID`),
   CONSTRAINT `FK__CustomerR__Repor__0F604C87` FOREIGN KEY (`ReportTypeID`) REFERENCES `ReportType` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `CustomerReportPart`
@@ -950,7 +952,7 @@ CREATE TABLE `CustomerReportPart` (
   `customerID` int(11) NOT NULL,
   `partID` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=279 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=279 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `CustomerUser`
@@ -971,7 +973,7 @@ CREATE TABLE `CustomerUser` (
   `passwordConverted` bit(1) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `DataTypes`
@@ -982,7 +984,7 @@ CREATE TABLE `DataTypes` (
   `type` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `DealerTiers`
@@ -993,7 +995,7 @@ CREATE TABLE `DealerTiers` (
   `tier` varchar(255) DEFAULT NULL,
   `sort` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `DealerTypes`
@@ -1006,7 +1008,7 @@ CREATE TABLE `DealerTypes` (
   `show` tinyint(1) NOT NULL DEFAULT '1',
   `label` varchar(300) DEFAULT NULL,
   PRIMARY KEY (`dealer_type`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `FAQ`
@@ -1017,7 +1019,7 @@ CREATE TABLE `FAQ` (
   `question` varchar(500) DEFAULT NULL,
   `answer` longtext,
   PRIMARY KEY (`faqID`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `File`
@@ -1036,7 +1038,7 @@ CREATE TABLE `File` (
   PRIMARY KEY (`fileID`),
   KEY `FK__File__fileExtID__6C390A4C` (`fileExtID`),
   CONSTRAINT `FK__File__fileExtID__6C390A4C` FOREIGN KEY (`fileExtID`) REFERENCES `FileExt` (`fileExtID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2356 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=2356 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `FileExt`
@@ -1050,7 +1052,7 @@ CREATE TABLE `FileExt` (
   PRIMARY KEY (`fileExtID`),
   KEY `FK__FileExt__fileTyp__6A50C1DA` (`fileTypeID`),
   CONSTRAINT `FK__FileExt__fileTyp__6A50C1DA` FOREIGN KEY (`fileTypeID`) REFERENCES `FileType` (`fileTypeID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `FileGallery`
@@ -1062,7 +1064,7 @@ CREATE TABLE `FileGallery` (
   `description` varchar(4000) DEFAULT NULL,
   `parentID` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`fileGalleryID`)
-) ENGINE=InnoDB AUTO_INCREMENT=140 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=140 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `FileType`
@@ -1072,7 +1074,7 @@ CREATE TABLE `FileType` (
   `fileTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `fileType` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`fileTypeID`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `ForumGroup`
@@ -1084,7 +1086,7 @@ CREATE TABLE `ForumGroup` (
   `description` longtext,
   `createdDate` datetime NOT NULL,
   PRIMARY KEY (`forumGroupID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `ForumPost`
@@ -1109,7 +1111,7 @@ CREATE TABLE `ForumPost` (
   PRIMARY KEY (`postID`),
   KEY `FK__ForumPost__threa__22B5E1E5` (`threadID`),
   CONSTRAINT `FK__ForumPost__threa__22B5E1E5` FOREIGN KEY (`threadID`) REFERENCES `ForumThread` (`threadID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `ForumThread`
@@ -1124,7 +1126,7 @@ CREATE TABLE `ForumThread` (
   PRIMARY KEY (`threadID`),
   KEY `FK__ForumThre__topic__1DF12CC8` (`topicID`),
   CONSTRAINT `FK__ForumThre__topic__1DF12CC8` FOREIGN KEY (`topicID`) REFERENCES `ForumTopic` (`topicID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `ForumTopic`
@@ -1142,7 +1144,7 @@ CREATE TABLE `ForumTopic` (
   PRIMARY KEY (`topicID`),
   KEY `FK__ForumTopi__Topic__192C77AB` (`TopicGroupID`),
   CONSTRAINT `FK__ForumTopi__Topic__192C77AB` FOREIGN KEY (`TopicGroupID`) REFERENCES `ForumGroup` (`forumGroupID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `Gallery`
@@ -1154,7 +1156,7 @@ CREATE TABLE `Gallery` (
   `title` varchar(200) DEFAULT NULL,
   `sort_order` int(11) NOT NULL,
   PRIMARY KEY (`imgID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `IPBlock`
@@ -1167,7 +1169,7 @@ CREATE TABLE `IPBlock` (
   `createdDate` datetime NOT NULL,
   `userID` int(11) NOT NULL,
   PRIMARY KEY (`blockID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `IncludedPart`
@@ -1182,7 +1184,7 @@ CREATE TABLE `IncludedPart` (
   KEY `FK__IncludedP__inclu__34D35F06` (`includedID`),
   CONSTRAINT `FK__IncludedP__inclu__34D35F06` FOREIGN KEY (`includedID`) REFERENCES `Part` (`partID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK__IncludedP__partI__33DF3ACD` FOREIGN KEY (`partID`) REFERENCES `Part` (`partID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `KioskOrderItems`
@@ -1196,7 +1198,7 @@ CREATE TABLE `KioskOrderItems` (
   `price` decimal(19,4) NOT NULL,
   `isFulfilled` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`itemID`)
-) ENGINE=InnoDB AUTO_INCREMENT=198 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=198 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `KioskOrders`
@@ -1219,7 +1221,7 @@ CREATE TABLE `KioskOrders` (
   `zip` varchar(100) DEFAULT NULL,
   `locationID` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`orderID`)
-) ENGINE=InnoDB AUTO_INCREMENT=10000123 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=10000123 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `LandingPage`
@@ -1238,7 +1240,7 @@ CREATE TABLE `LandingPage` (
   `newWindow` tinyint(1) NOT NULL DEFAULT '0',
   `menuPosition` varchar(15) NOT NULL DEFAULT 'top',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `LandingPageData`
@@ -1252,7 +1254,7 @@ CREATE TABLE `LandingPageData` (
   PRIMARY KEY (`id`),
   KEY `FK__LandingPa__landi__5A2413EF` (`landingPageID`),
   CONSTRAINT `FK__LandingPa__landi__5A2413EF` FOREIGN KEY (`landingPageID`) REFERENCES `LandingPage` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `LandingPageImages`
@@ -1266,7 +1268,7 @@ CREATE TABLE `LandingPageImages` (
   PRIMARY KEY (`id`),
   KEY `FK__LandingPa__landi__555F5ED2` (`landingPageID`),
   CONSTRAINT `FK__LandingPa__landi__555F5ED2` FOREIGN KEY (`landingPageID`) REFERENCES `LandingPage` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `Lifestyle_Trailer`
@@ -1281,7 +1283,7 @@ CREATE TABLE `Lifestyle_Trailer` (
   KEY `FK__Lifestyle__trail__095D28A4` (`trailerID`),
   CONSTRAINT `FK__Lifestyle__catID__0869046B` FOREIGN KEY (`catID`) REFERENCES `Categories` (`catID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK__Lifestyle__trail__095D28A4` FOREIGN KEY (`trailerID`) REFERENCES `Trailer` (`trailerID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=165 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=165 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `LoadsheetFields`
@@ -1294,7 +1296,7 @@ CREATE TABLE `LoadsheetFields` (
   `description` varchar(255) DEFAULT NULL,
   `loadsheetID` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `Location_Services`
@@ -1305,7 +1307,7 @@ CREATE TABLE `Location_Services` (
   `serviceID` int(11) NOT NULL,
   `locationID` int(11) NOT NULL,
   PRIMARY KEY (`loc_service_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `Locations`
@@ -1328,7 +1330,7 @@ CREATE TABLE `Locations` (
   `places_reference` varchar(300) DEFAULT NULL,
   `places_id` varchar(300) DEFAULT NULL,
   PRIMARY KEY (`locationID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `Logger`
@@ -1346,7 +1348,7 @@ CREATE TABLE `Logger` (
   UNIQUE KEY `id` (`id`),
   KEY `FK_Logger_LoggerTypes` (`loggedType`),
   CONSTRAINT `FK_Logger_LoggerTypes` FOREIGN KEY (`loggedType`) REFERENCES `LoggerTypes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `LoggerTypes`
@@ -1357,7 +1359,7 @@ CREATE TABLE `LoggerTypes` (
   `type` varchar(200) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `Make`
@@ -1367,7 +1369,7 @@ CREATE TABLE `Make` (
   `makeID` int(11) NOT NULL AUTO_INCREMENT,
   `make` varchar(255) NOT NULL,
   PRIMARY KEY (`makeID`)
-) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `MakeModel`
@@ -1382,7 +1384,7 @@ CREATE TABLE `MakeModel` (
   KEY `FK__MakeModel__model__4977ADB9` (`modelID`),
   CONSTRAINT `FK__MakeModel__makeI__48838980` FOREIGN KEY (`makeID`) REFERENCES `Make` (`makeID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK__MakeModel__model__4977ADB9` FOREIGN KEY (`modelID`) REFERENCES `Model` (`modelID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=769 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=769 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `MapIcons`
@@ -1399,7 +1401,7 @@ CREATE TABLE `MapIcons` (
   KEY `FK__MapIcons__dealer__5064A26A` (`dealer_type`),
   CONSTRAINT `FK__MapIcons__dealer__5064A26A` FOREIGN KEY (`dealer_type`) REFERENCES `DealerTypes` (`dealer_type`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK__MapIcons__tier__4F707E31` FOREIGN KEY (`tier`) REFERENCES `DealerTiers` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `MapPolygon`
@@ -1409,7 +1411,7 @@ CREATE TABLE `MapPolygon` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `stateID` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=148 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=148 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `MapPolygonCoordinates`
@@ -1421,7 +1423,7 @@ CREATE TABLE `MapPolygonCoordinates` (
   `latitude` double NOT NULL,
   `longitude` double NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=16225 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=16225 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `MapixCode`
@@ -1432,7 +1434,7 @@ CREATE TABLE `MapixCode` (
   `code` varchar(255) DEFAULT NULL,
   `description` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`mCodeID`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `Menu`
@@ -1448,7 +1450,7 @@ CREATE TABLE `Menu` (
   `showOnSitemap` tinyint(1) NOT NULL DEFAULT '0',
   `sort` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`menuID`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `Menu_SiteContent`
@@ -1468,7 +1470,7 @@ CREATE TABLE `Menu_SiteContent` (
   KEY `FK__Menu_Site__conte__2180FB33` (`contentID`),
   KEY `FK__Menu_Site__paren__22751F6C` (`parentID`),
   CONSTRAINT `FK__Menu_Site__menuI__208CD6FA` FOREIGN KEY (`menuID`) REFERENCES `Menu` (`menuID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=141 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=141 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `Model`
@@ -1478,7 +1480,7 @@ CREATE TABLE `Model` (
   `modelID` int(11) NOT NULL AUTO_INCREMENT,
   `model` varchar(255) NOT NULL,
   PRIMARY KEY (`modelID`)
-) ENGINE=InnoDB AUTO_INCREMENT=743 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=743 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `ModelStyle`
@@ -1493,7 +1495,7 @@ CREATE TABLE `ModelStyle` (
   KEY `FK__ModelStyl__style__4B5FF62B` (`styleID`),
   CONSTRAINT `FK__ModelStyl__model__4A6BD1F2` FOREIGN KEY (`modelID`) REFERENCES `Model` (`modelID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK__ModelStyl__style__4B5FF62B` FOREIGN KEY (`styleID`) REFERENCES `Style` (`styleID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=1447 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=1447 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `Modules`
@@ -1505,7 +1507,7 @@ CREATE TABLE `Modules` (
   `path` varchar(100) DEFAULT NULL,
   `image` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`moduleID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `NewsItem`
@@ -1521,7 +1523,7 @@ CREATE TABLE `NewsItem` (
   `active` tinyint(1) NOT NULL DEFAULT '1',
   `slug` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`newsItemID`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `Note`
@@ -1534,7 +1536,7 @@ CREATE TABLE `Note` (
   PRIMARY KEY (`ID`),
   KEY `AAIA_Note_IX` (`vehiclePartID`),
   CONSTRAINT `FK__Note__vehiclePar__2BFEED3A` FOREIGN KEY (`vehiclePartID`) REFERENCES `vcdb_VehiclePart` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=487062 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=487062 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `PackageType`
@@ -1544,7 +1546,7 @@ CREATE TABLE `PackageType` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `Part`
@@ -1564,10 +1566,8 @@ CREATE TABLE `Part` (
   `replacedBy` int(11) DEFAULT NULL,
   PRIMARY KEY (`partID`),
   KEY `IX_Part_status` (`status`),
-  KEY `IX_Part_Class` (`classID`),
-  FULLTEXT KEY `shortDesc` (`shortDesc`),
-  FULLTEXT KEY `shortDesc_2` (`shortDesc`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+  KEY `IX_Part_Class` (`classID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `PartAttribute`
@@ -1581,10 +1581,8 @@ CREATE TABLE `PartAttribute` (
   `sort` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`pAttrID`),
   KEY `IX_PartAttribute_Part` (`partID`),
-  FULLTEXT KEY `value` (`value`),
-  FULLTEXT KEY `field` (`field`,`value`),
   CONSTRAINT `FK__PartAttri__partI__4C541A64` FOREIGN KEY (`partID`) REFERENCES `Part` (`partID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=69090 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=69090 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `PartGroup`
@@ -1594,7 +1592,7 @@ CREATE TABLE `PartGroup` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=552 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=552 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `PartGroupPart`
@@ -1610,7 +1608,7 @@ CREATE TABLE `PartGroupPart` (
   KEY `FK__PartGroup__partI__2E266177` (`partID`),
   CONSTRAINT `FK__PartGroup__partG__2D323D3E` FOREIGN KEY (`partGroupID`) REFERENCES `PartGroup` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK__PartGroup__partI__2E266177` FOREIGN KEY (`partID`) REFERENCES `Part` (`partID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2202 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=2202 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `PartImageSizes`
@@ -1621,7 +1619,7 @@ CREATE TABLE `PartImageSizes` (
   `size` varchar(25) DEFAULT NULL,
   `dimensions` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`sizeID`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `PartImages`
@@ -1640,7 +1638,7 @@ CREATE TABLE `PartImages` (
   KEY `IX_PartImages_Size` (`sizeID`),
   CONSTRAINT `FK__PartImage__partI__0E21DDC1` FOREIGN KEY (`partID`) REFERENCES `Part` (`partID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK__PartImage__sizeI__0D2DB988` FOREIGN KEY (`sizeID`) REFERENCES `PartImageSizes` (`sizeID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3848888 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=3848888 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `PartIndex`
@@ -1650,39 +1648,8 @@ CREATE TABLE `PartIndex` (
   `partIndexID` bigint(20) NOT NULL AUTO_INCREMENT,
   `partID` int(11) NOT NULL,
   `partIndex` longtext,
-  PRIMARY KEY (`partIndexID`),
-  FULLTEXT KEY `partIndex` (`partIndex`),
-  FULLTEXT KEY `partIndex_2` (`partIndex`),
-  FULLTEXT KEY `partIndex_3` (`partIndex`),
-  FULLTEXT KEY `partIndex_4` (`partIndex`),
-  FULLTEXT KEY `partIndex_5` (`partIndex`),
-  FULLTEXT KEY `partIndex_6` (`partIndex`),
-  FULLTEXT KEY `partIndex_7` (`partIndex`),
-  FULLTEXT KEY `partIndex_8` (`partIndex`),
-  FULLTEXT KEY `partIndex_9` (`partIndex`),
-  FULLTEXT KEY `partIndex_10` (`partIndex`),
-  FULLTEXT KEY `partIndex_11` (`partIndex`),
-  FULLTEXT KEY `partIndex_12` (`partIndex`),
-  FULLTEXT KEY `partIndex_13` (`partIndex`),
-  FULLTEXT KEY `partIndex_14` (`partIndex`),
-  FULLTEXT KEY `partIndex_15` (`partIndex`),
-  FULLTEXT KEY `partIndex_16` (`partIndex`),
-  FULLTEXT KEY `partIndex_17` (`partIndex`),
-  FULLTEXT KEY `partIndex_18` (`partIndex`),
-  FULLTEXT KEY `partIndex_19` (`partIndex`),
-  FULLTEXT KEY `partIndex_20` (`partIndex`),
-  FULLTEXT KEY `partIndex_21` (`partIndex`),
-  FULLTEXT KEY `partIndex_22` (`partIndex`),
-  FULLTEXT KEY `partIndex_23` (`partIndex`),
-  FULLTEXT KEY `partIndex_24` (`partIndex`),
-  FULLTEXT KEY `partIndex_25` (`partIndex`),
-  FULLTEXT KEY `partIndex_26` (`partIndex`),
-  FULLTEXT KEY `partIndex_27` (`partIndex`),
-  FULLTEXT KEY `partIndex_28` (`partIndex`),
-  FULLTEXT KEY `partIndex_29` (`partIndex`),
-  FULLTEXT KEY `partIndex_30` (`partIndex`),
-  FULLTEXT KEY `partIndex_31` (`partIndex`)
-) ENGINE=InnoDB AUTO_INCREMENT=84240 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+  PRIMARY KEY (`partIndexID`)
+) ENGINE=InnoDB AUTO_INCREMENT=84240 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `PartPackage`
@@ -1709,7 +1676,7 @@ CREATE TABLE `PartPackage` (
   CONSTRAINT `packageUnit_FK` FOREIGN KEY (`packageUOM`) REFERENCES `UnitOfMeasure` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `typeUnit_FK` FOREIGN KEY (`typeID`) REFERENCES `PackageType` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `weightUnit_FK` FOREIGN KEY (`weightUOM`) REFERENCES `UnitOfMeasure` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4828 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=4828 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `PartVideo`
@@ -1726,7 +1693,7 @@ CREATE TABLE `PartVideo` (
   KEY `FK__PartVideo__partI__3818178D` (`partID`),
   CONSTRAINT `FK__PartVideo__partI__3818178D` FOREIGN KEY (`partID`) REFERENCES `Part` (`partID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK__PartVideo__vType__3723F354` FOREIGN KEY (`vTypeID`) REFERENCES `videoType` (`vTypeID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=6514 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=6514 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `Post_Category`
@@ -1739,7 +1706,7 @@ CREATE TABLE `Post_Category` (
   PRIMARY KEY (`postCategoryID`),
   KEY `FK__Post_Cate__postI__2BC97F7C` (`postID`),
   CONSTRAINT `FK__Post_Cate__postI__2BC97F7C` FOREIGN KEY (`postID`) REFERENCES `Posts` (`postID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `Posts`
@@ -1760,7 +1727,7 @@ CREATE TABLE `Posts` (
   KEY `FK__Posts__siteConte__29E1370A` (`siteContentID`),
   CONSTRAINT `FK__Posts__authorID__28ED12D1` FOREIGN KEY (`authorID`) REFERENCES `Authors` (`authorID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK__Posts__siteConte__29E1370A` FOREIGN KEY (`siteContentID`) REFERENCES `SiteContent` (`contentID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `Price`
@@ -1776,7 +1743,7 @@ CREATE TABLE `Price` (
   PRIMARY KEY (`priceID`),
   KEY `IX_Price_Part` (`partID`),
   CONSTRAINT `FK__Price__partID__0A514CDD` FOREIGN KEY (`partID`) REFERENCES `Part` (`partID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=31021 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=31021 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `Region`
@@ -1786,7 +1753,7 @@ CREATE TABLE `Region` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `RelatedPart`
@@ -1799,7 +1766,7 @@ CREATE TABLE `RelatedPart` (
   `rTypeID` int(11) NOT NULL,
   PRIMARY KEY (`relPartID`),
   KEY `IX_RelatedPart_Part` (`partID`,`relatedID`)
-) ENGINE=InnoDB AUTO_INCREMENT=26343 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=26343 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `RelatedType`
@@ -1809,7 +1776,7 @@ CREATE TABLE `RelatedType` (
   `rTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`rTypeID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `ReportType`
@@ -1819,7 +1786,7 @@ CREATE TABLE `ReportType` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(200) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `Review`
@@ -1841,7 +1808,7 @@ CREATE TABLE `Review` (
   KEY `ReviewPartID` (`partID`),
   KEY `IX_Review_Part` (`partID`,`createdDate`),
   CONSTRAINT `FK__Review__partID__0C39954F` FOREIGN KEY (`partID`) REFERENCES `Part` (`partID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=634 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=634 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `SalesRepresentative`
@@ -1852,7 +1819,7 @@ CREATE TABLE `SalesRepresentative` (
   `name` varchar(255) DEFAULT NULL,
   `code` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`salesRepID`)
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `Services`
@@ -1865,7 +1832,7 @@ CREATE TABLE `Services` (
   `service_price` decimal(19,4) NOT NULL DEFAULT '0.0000',
   `hourly` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`serviceID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `SiteContent`
@@ -1887,7 +1854,7 @@ CREATE TABLE `SiteContent` (
   `requireAuthentication` tinyint(1) NOT NULL DEFAULT '0',
   `canonical` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`contentID`)
-) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `SiteContentRevision`
@@ -1902,7 +1869,7 @@ CREATE TABLE `SiteContentRevision` (
   PRIMARY KEY (`revisionID`),
   KEY `FK__SiteConte__conte__151B244E` (`contentID`),
   CONSTRAINT `FK__SiteConte__conte__151B244E` FOREIGN KEY (`contentID`) REFERENCES `SiteContent` (`contentID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `State`
@@ -1913,7 +1880,7 @@ CREATE TABLE `State` (
   `abbr` varchar(128) NOT NULL,
   `stateID` int(11) NOT NULL,
   `countryID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `States`
@@ -1927,7 +1894,7 @@ CREATE TABLE `States` (
   PRIMARY KEY (`stateID`),
   KEY `FK__States__countryI__607251E5` (`countryID`),
   CONSTRAINT `FK__States__countryI__607251E5` FOREIGN KEY (`countryID`) REFERENCES `Country` (`countryID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `Style`
@@ -1938,7 +1905,7 @@ CREATE TABLE `Style` (
   `style` varchar(255) NOT NULL,
   `aaiaID` int(11) NOT NULL,
   PRIMARY KEY (`styleID`)
-) ENGINE=InnoDB AUTO_INCREMENT=644 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=644 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `Submodel`
@@ -1950,7 +1917,7 @@ CREATE TABLE `Submodel` (
   `SubmodelName` varchar(50) NOT NULL,
   PRIMARY KEY (`ID`),
   KEY `AAIA_Submodel_IX` (`AAIASubmodelID`)
-) ENGINE=InnoDB AUTO_INCREMENT=1781 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=1781 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `Survey`
@@ -1965,7 +1932,7 @@ CREATE TABLE `Survey` (
   `userID` int(11) NOT NULL,
   `deleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='Survey Declaration';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `SurveyAnswer`
@@ -1983,7 +1950,7 @@ CREATE TABLE `SurveyAnswer` (
   PRIMARY KEY (`id`),
   KEY `SurveyQuestion_FK` (`questionID`),
   CONSTRAINT `SurveyQuestion_FK` FOREIGN KEY (`questionID`) REFERENCES `SurveyQuestion` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='Answers to Survey Questions';
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `SurveyAnswer_Revisions`
@@ -1998,7 +1965,7 @@ CREATE TABLE `SurveyAnswer_Revisions` (
   `changeType` enum('NEW','EDIT','DELETE') NOT NULL,
   `answerID` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='Revision Tracking for Survey Answers';
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `SurveyPrize`
@@ -2017,7 +1984,7 @@ CREATE TABLE `SurveyPrize` (
   `deleted` tinyint(1) NOT NULL DEFAULT '0',
   `current` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='Prize for survey';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `SurveyPrize_Revisions`
@@ -2036,7 +2003,7 @@ CREATE TABLE `SurveyPrize_Revisions` (
   `changeType` enum('NEW','EDIT','DELETE') NOT NULL,
   `prizeID` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='Revisions for SurveyPrize';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `SurveyQuestion`
@@ -2051,7 +2018,7 @@ CREATE TABLE `SurveyQuestion` (
   `surveyID` int(11) NOT NULL,
   `deleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='Survey Questions';
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `SurveyQuestion_Revisions`
@@ -2070,7 +2037,7 @@ CREATE TABLE `SurveyQuestion_Revisions` (
   `new_survey` int(11) NOT NULL DEFAULT '0',
   `old_survey` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='Revision Tracking for Survey Questions';
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `SurveyUser`
@@ -2083,7 +2050,7 @@ CREATE TABLE `SurveyUser` (
   `email` varchar(500) DEFAULT NULL,
   `date_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='User Information for taking surveys';
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `SurveyUserAnswer`
@@ -2101,7 +2068,7 @@ CREATE TABLE `SurveyUserAnswer` (
   KEY `SurveyQuestionAnswer_FK` (`questionID`),
   CONSTRAINT `SurveyQuestionAnswer_FK` FOREIGN KEY (`questionID`) REFERENCES `SurveyQuestion` (`id`),
   CONSTRAINT `Survey_FK` FOREIGN KEY (`surveyID`) REFERENCES `Survey` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=226 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=226 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `Survey_Revisions`
@@ -2116,7 +2083,7 @@ CREATE TABLE `Survey_Revisions` (
   `changeType` enum('NEW','EDIT','DELETE') NOT NULL,
   `surveyID` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='Revision Tracking for Surveys';
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `TechNews`
@@ -2133,7 +2100,7 @@ CREATE TABLE `TechNews` (
   `title` varchar(500) NOT NULL,
   `subTitle` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `TempCustomer`
@@ -2141,7 +2108,7 @@ CREATE TABLE `TechNews` (
 DROP TABLE IF EXISTS `TempCustomer`;
 CREATE TABLE `TempCustomer` (
   `customerID` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `Testimonial`
@@ -2159,7 +2126,7 @@ CREATE TABLE `Testimonial` (
   `last_name` varchar(255) DEFAULT NULL,
   `location` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`testimonialID`)
-) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `Testimonials`
@@ -2173,7 +2140,7 @@ CREATE TABLE `Testimonials` (
   `is_new` int(11) NOT NULL DEFAULT '0',
   `is_hidden` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`reviewID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `Trailer`
@@ -2189,7 +2156,7 @@ CREATE TABLE `Trailer` (
   `shortDesc` varchar(1000) DEFAULT NULL,
   `message` varchar(1000) DEFAULT NULL,
   PRIMARY KEY (`trailerID`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `Tweets`
@@ -2205,7 +2172,7 @@ CREATE TABLE `Tweets` (
   `profilePhoto` varchar(500) NOT NULL,
   PRIMARY KEY (`tweetID`),
   UNIQUE KEY `tweetID_UNIQUE` (`tweetID`)
-) ENGINE=InnoDB AUTO_INCREMENT=755 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=755 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `TwitterLog`
@@ -2227,7 +2194,7 @@ CREATE TABLE `UnitOfMeasure` (
   `name` varchar(255) DEFAULT NULL,
   `code` varchar(5) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `UserProfiles`
@@ -2240,7 +2207,7 @@ CREATE TABLE `UserProfiles` (
   `email` varchar(255) DEFAULT NULL,
   `IP` varchar(25) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=851 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=851 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `Vehicle`
@@ -2262,7 +2229,7 @@ CREATE TABLE `Vehicle` (
   CONSTRAINT `FK__Vehicle__modelID__4F30870F` FOREIGN KEY (`modelID`) REFERENCES `Model` (`modelID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK__Vehicle__styleID__5024AB48` FOREIGN KEY (`styleID`) REFERENCES `Style` (`styleID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK__Vehicle__yearID__4D483E9D` FOREIGN KEY (`yearID`) REFERENCES `Year` (`yearID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=249131 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=249131 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `VehicleConfig`
@@ -2273,7 +2240,7 @@ CREATE TABLE `VehicleConfig` (
   `AAIAVehicleConfigID` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `AAIA_VehicleConfig_IX` (`AAIAVehicleConfigID`)
-) ENGINE=InnoDB AUTO_INCREMENT=32386 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=32386 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `VehicleConfigAttribute`
@@ -2288,7 +2255,7 @@ CREATE TABLE `VehicleConfigAttribute` (
   KEY `FK__VehicleCo__Vehic__1AD46138` (`VehicleConfigID`),
   CONSTRAINT `FK__VehicleCo__Attri__19E03CFF` FOREIGN KEY (`AttributeID`) REFERENCES `ConfigAttribute` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK__VehicleCo__Vehic__1AD46138` FOREIGN KEY (`VehicleConfigID`) REFERENCES `VehicleConfig` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=46347 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=46347 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `VehiclePart`
@@ -2306,7 +2273,7 @@ CREATE TABLE `VehiclePart` (
   KEY `FK__VehiclePa__partI__0F1601FA` (`partID`),
   CONSTRAINT `FK__VehiclePa__partI__0F1601FA` FOREIGN KEY (`partID`) REFERENCES `Part` (`partID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK__VehiclePa__vehic__5118CF81` FOREIGN KEY (`vehicleID`) REFERENCES `Vehicle` (`vehicleID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=45438 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=45438 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `VehiclePartAttribute`
@@ -2321,7 +2288,7 @@ CREATE TABLE `VehiclePartAttribute` (
   PRIMARY KEY (`vpAttrID`),
   KEY `IX_VehiclePartAttr_VPart` (`vPartID`),
   CONSTRAINT `FK__VehiclePa__vPart__520CF3BA` FOREIGN KEY (`vPartID`) REFERENCES `VehiclePart` (`vPartID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=106256 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=106256 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `VehicleType`
@@ -2334,7 +2301,7 @@ CREATE TABLE `VehicleType` (
   PRIMARY KEY (`VehicleTypeID`),
   KEY `FK__VehicleTy__Vehic__648AFD1B` (`VehicleTypeGroupID`),
   CONSTRAINT `FK__VehicleTy__Vehic__648AFD1B` FOREIGN KEY (`VehicleTypeGroupID`) REFERENCES `VehicleTypeGroup` (`VehicleTypeGroupID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `VehicleTypeGroup`
@@ -2344,7 +2311,7 @@ CREATE TABLE `VehicleTypeGroup` (
   `VehicleTypeGroupID` int(11) NOT NULL AUTO_INCREMENT,
   `VehicleTypeGroupName` varchar(50) NOT NULL,
   PRIMARY KEY (`VehicleTypeGroupID`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `Video`
@@ -2361,7 +2328,7 @@ CREATE TABLE `Video` (
   `watchpage` varchar(255) DEFAULT NULL,
   `screenshot` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`videoID`)
-) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `VideoCdnFiles`
@@ -2372,7 +2339,7 @@ CREATE TABLE `VideoCdnFiles` (
   `cdnID` int(11) NOT NULL,
   `videoID` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `VideoChannels`
@@ -2383,7 +2350,7 @@ CREATE TABLE `VideoChannels` (
   `videoID` int(11) NOT NULL,
   `channelID` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=191 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=191 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `VideoJoin`
@@ -2397,7 +2364,7 @@ CREATE TABLE `VideoJoin` (
   `websiteID` int(11) NOT NULL DEFAULT '0',
   `isPrimary` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=6384 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=6384 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `VideoNew`
@@ -2413,7 +2380,7 @@ CREATE TABLE `VideoNew` (
   `isPrimary` tinyint(1) NOT NULL DEFAULT '0',
   `thumbnail` varchar(255) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=208 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=208 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `WebPropNotes`
@@ -2425,7 +2392,7 @@ CREATE TABLE `WebPropNotes` (
   `text` varchar(255) NOT NULL,
   `dateAdded` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `WebPropRequirementCheck`
@@ -2441,7 +2408,7 @@ CREATE TABLE `WebPropRequirementCheck` (
   KEY `webPropReqID_ref_idx` (`WebPropRequirementsID`),
   CONSTRAINT `webPropID_ref` FOREIGN KEY (`WebPropertiesID`) REFERENCES `WebProperties` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `webPropReqID_ref` FOREIGN KEY (`WebPropRequirementsID`) REFERENCES `WebPropRequirements` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=886 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=886 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `WebPropRequirements`
@@ -2452,7 +2419,7 @@ CREATE TABLE `WebPropRequirements` (
   `ReqType` varchar(255) DEFAULT NULL,
   `Requirement` varchar(1000) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `WebProperties`
@@ -2476,7 +2443,7 @@ CREATE TABLE `WebProperties` (
   UNIQUE KEY `badgeID` (`badgeID`),
   KEY `type_ref_idx` (`typeID`),
   CONSTRAINT `type_ref` FOREIGN KEY (`typeID`) REFERENCES `WebPropertyTypes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=231 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=231 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `WebPropertyTypes`
@@ -2487,7 +2454,7 @@ CREATE TABLE `WebPropertyTypes` (
   `typeID` int(11) NOT NULL,
   `type` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `Website`
@@ -2498,7 +2465,7 @@ CREATE TABLE `Website` (
   `url` varchar(255) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `WidgetDeployments`
@@ -2509,7 +2476,7 @@ CREATE TABLE `WidgetDeployments` (
   `url` varchar(400) NOT NULL,
   `date_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`trackerID`)
-) ENGINE=InnoDB AUTO_INCREMENT=127 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=127 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `Year`
@@ -2519,7 +2486,7 @@ CREATE TABLE `Year` (
   `yearID` int(11) NOT NULL AUTO_INCREMENT,
   `year` double NOT NULL,
   PRIMARY KEY (`yearID`)
-) ENGINE=InnoDB AUTO_INCREMENT=284 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=284 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `YearMake`
@@ -2534,7 +2501,7 @@ CREATE TABLE `YearMake` (
   KEY `FK__YearMake__makeID__478F6547` (`makeID`),
   CONSTRAINT `FK__YearMake__makeID__478F6547` FOREIGN KEY (`makeID`) REFERENCES `Make` (`makeID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK__YearMake__yearID__469B410E` FOREIGN KEY (`yearID`) REFERENCES `Year` (`yearID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=1354 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=1354 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `vcdb_Make`
@@ -2546,7 +2513,7 @@ CREATE TABLE `vcdb_Make` (
   `MakeName` varchar(50) NOT NULL,
   PRIMARY KEY (`ID`),
   KEY `AAIA_Make_IX` (`AAIAMakeID`)
-) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `vcdb_Model`
@@ -2559,7 +2526,7 @@ CREATE TABLE `vcdb_Model` (
   `VehicleTypeID` int(11) NOT NULL,
   PRIMARY KEY (`ID`),
   KEY `AAIA_Model_IX` (`AAIAModelID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3904 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=3904 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `vcdb_Vehicle`
@@ -2579,7 +2546,7 @@ CREATE TABLE `vcdb_Vehicle` (
   CONSTRAINT `FK__vcdb_Vehi__BaseV__1F991655` FOREIGN KEY (`BaseVehicleID`) REFERENCES `BaseVehicle` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK__vcdb_Vehi__Confi__21815EC7` FOREIGN KEY (`ConfigID`) REFERENCES `VehicleConfig` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK__vcdb_Vehi__SubMo__208D3A8E` FOREIGN KEY (`SubModelID`) REFERENCES `Submodel` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=44041 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=44041 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `vcdb_VehiclePart`
@@ -2594,7 +2561,7 @@ CREATE TABLE `vcdb_VehiclePart` (
   KEY `FK__vcdb_Vehi__PartN__273A381D` (`PartNumber`),
   CONSTRAINT `FK__vcdb_Vehi__PartN__273A381D` FOREIGN KEY (`PartNumber`) REFERENCES `Part` (`partID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK__vcdb_Vehi__Vehic__264613E4` FOREIGN KEY (`VehicleID`) REFERENCES `vcdb_Vehicle` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=225533 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=225533 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `vcdb_Year`
@@ -2603,7 +2570,7 @@ DROP TABLE IF EXISTS `vcdb_Year`;
 CREATE TABLE `vcdb_Year` (
   `YearID` int(11) NOT NULL,
   PRIMARY KEY (`YearID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `videoType`
@@ -2614,547 +2581,6 @@ CREATE TABLE `videoType` (
   `name` varchar(255) DEFAULT NULL,
   `icon` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`vTypeID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
-
--- ----------------------------
---  Procedure structure for `active_parts_proc`
--- ----------------------------
-DROP PROCEDURE IF EXISTS `active_parts_proc`;
-delimiter ;;
-CREATE DEFINER=`curtDuser2`@`%` PROCEDURE `active_parts_proc`()
-BEGIN
-	
-	DROP TEMPORARY TABLE IF EXISTS temp;
-	CREATE TEMPORARY TABLE IF NOT EXISTS temp (
-		tempID INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
-		partID INTEGER NULL,
-		AcesID INTEGER NULL,
-		shortDesc VARCHAR(500) NULL,
-		listDesc LONGTEXT NULL,
-		jobberPrice DECIMAL(12,2) NULL,
-		listPrice DECIMAL(12,2) NULL,
-		height DECIMAL(12,2) NULL,
-		width DECIMAL(12,2) NULL,
-		length DECIMAL(12,2) NULL,
-		weight DECIMAL(12,2) NULL		
-	);
-	
-	INSERT INTO temp (partID)
-	SELECT p.partID
-	FROM Part p
-	WHERE p.status = 800;
-
-	UPDATE temp as t, Part as pt	
-	SET t.AcesID = pt.ACESPartTypeID
-	WHERE t.partID = pt.partID
-	AND	pt.status = 800;
-
-	UPDATE temp as t, Part as pt	
-	SET t.shortDesc = pt.shortDesc
-	WHERE t.partID = pt.partID
-	AND	pt.status = 800;
-
-	UPDATE temp as t, Content as c, ContentBridge as cb
-	SET t.listDesc = c.text
-	WHERE t.partID = cb.partID
-	AND	  cb.contentID = c.contentID
-	AND c.cTypeID = 11;
-
-	UPDATE temp as t, Price as pr	
-	SET t.jobberPrice = pr.price
-	WHERE t.partID = pr.partID
-	AND	pr.priceType = "Jobber";
-
-	UPDATE temp as t, Price as pr	
-	SET t.listPrice = pr.price
-	WHERE t.partID = pr.partID
-	AND	pr.priceType = "List";
-
-	UPDATE temp as t, PartPackage pk
-	SET t.length = pk.length,
-		t.width = pk.width,
-		t.height = pk.height,
-		t.weight = pk.weight
-	WHERE t.partID = pk.partID;
-
-	SELECT * FROM temp;
-	DROP TEMPORARY TABLE IF EXISTS temp;
-END
- ;;
-delimiter ;
-
--- ----------------------------
---  Procedure structure for `global_indust_proc`
--- ----------------------------
-DROP PROCEDURE IF EXISTS `global_indust_proc`;
-delimiter ;;
-CREATE DEFINER=`curtDuser2`@`%` PROCEDURE `global_indust_proc`()
-BEGIN
-
-	DECLARE cnt INT DEFAULT 1;
-	DECLARE catName VARCHAR(50);
-	
-	DROP TEMPORARY TABLE IF EXISTS temp;
-	CREATE TEMPORARY TABLE IF NOT EXISTS temp (
-		tempID INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
-		partID INTEGER NULL,
-		shortDesc VARCHAR(500) NULL,
-		listDesc LONGTEXT NULL,
-		listPrice DECIMAL(12,2) NULL,
-		UPC VARCHAR(255) NULL,
-		length DECIMAL(12,2) NULL,
-		width DECIMAL(12,2) NULL,
-		height DECIMAL(12,2) NULL,
-		weight DECIMAL(12,2) NULL,
-		parentCategory VARCHAR(50) NULL DEFAULT "",
-		material VARCHAR(50) NULL DEFAULT "",
-		finish VARCHAR(50) NULL DEFAULT "",
-		ballDiameter VARCHAR(50) NULL DEFAULT "",
-		hitchDrop VARCHAR(50) NULL DEFAULT "",
-		rise VARCHAR(50) NULL DEFAULT "",
-		ballHole VARCHAR(50) NULL DEFAULT "",
-		shankLength VARCHAR(50) NULL DEFAULT "",
-		shankDiameter VARCHAR(50) NULL DEFAULT "",
-		recTubeSize VARCHAR(50) NULL DEFAULT ""
-	);
-	
-	INSERT INTO temp (partID)
-	SELECT p.partID
-	FROM Part p
-	WHERE p.status = 800;
-
-	UPDATE temp as t, Part as pt	
-	SET t.shortDesc = pt.shortDesc
-	WHERE t.partID = pt.partID
-	AND	pt.status = 800;
-
-	UPDATE temp as t, Content as c, ContentBridge as cb
-	SET t.listDesc = c.text
-	WHERE t.partID = cb.partID
-	AND	  cb.contentID = c.contentID
-	AND c.cTypeID = 11;
-
-	UPDATE temp as t, Price as pr	
-	SET t.listPRice = pr.price
-	WHERE t.partID = pr.partID
-	AND	pr.priceType = "List";
-
-	UPDATE temp as t, PartAttribute pa
-	SET t.UPC = pa.value
-	WHERE t.partID = pa.partID
-	AND pa.field = "UPC";
-
-	UPDATE temp as t, PartPackage pk
-	SET t.length = pk.length,
-		t.width = pk.width,
-		t.height = pk.height,
-		t.weight = pk.weight
-	WHERE t.partID = pk.partID;
-
-	UPDATE temp as t, PartAttribute pa
-	SET t.material = pa.value
-	WHERE t.partID = pa.partID
-	AND pa.field = "Material";
-
-	UPDATE temp as t, PartAttribute pa
-	SET t.finish = pa.value
-	WHERE t.partID = pa.partID
-	AND pa.field = "Finish";
-	
-	UPDATE temp as t, PartAttribute pa
-	SET t.ballDiameter = pa.value
-	WHERE t.partID = pa.partID
-	AND pa.field = "Ball Diameter";
-
-	UPDATE temp as t, PartAttribute pa
-	SET t.hitchDrop = pa.value
-	WHERE t.partID = pa.partID
-	AND pa.field = "Drop";
-
-	UPDATE temp as t, PartAttribute pa
-	SET t.rise = pa.value
-	WHERE t.partID = pa.partID
-	AND pa.field = "Rise";
-
-	UPDATE temp as t, PartAttribute pa
-	SET t.ballHole = pa.value
-	WHERE t.partID = pa.partID
-	AND pa.field = "Ball Hole";
-
-	UPDATE temp as t, PartAttribute pa
-	SET t.shankLength = pa.value
-	WHERE t.partID = pa.partID
-	AND pa.field = "Shank Length";
-			
-	UPDATE temp as t, PartAttribute pa
-	SET t.shankDiameter = pa.value
-	WHERE t.partID = pa.partID
-	AND pa.field = "Shank Diameter";
-
-	UPDATE temp as t, PartAttribute pa
-	SET t.recTubeSize = pa.value
-	WHERE t.partID = pa.partID
-	AND pa.field = "Receiver Tube Size";
-
-	UPDATE temp as t, Part as p
-	SET t.parentCategory = (SELECT parent_cat_func(p.partID))
-	WHERE t.partID = p.partID;
-
-	SELECT * FROM temp;
-	DROP TEMPORARY TABLE IF EXISTS temp;
-
-END
- ;;
-delimiter ;
-
--- ----------------------------
---  Function structure for `categoryLoop`
--- ----------------------------
-DROP FUNCTION IF EXISTS `categoryLoop`;
-delimiter ;;
-CREATE DEFINER=`ninnemana`@`%` FUNCTION `categoryLoop`(categoryID int) RETURNS varchar(255) CHARSET latin1
-BEGIN
-
-	declare cats varchar(255);
-	declare parentID int;
-
-	declare title varchar(255);
-	set cats = "";
-
-	select c1.parentID, c1.catTitle into parentID, title from Categories as c1
-	join CatPart as cp on c1.catID = cp.catID
-	where c1.catID = categoryID
-	limit 1;
-
-
-	set cats = title;
-	WHILE parentID > 0 do
-
-		
-		select c2.catTitle, c2.parentID into title, parentID from Categories as c2
-		where catID = parentID
-		limit 1;
-		
-		set cats = CONCAT(title,'/',cats);
-	END WHILE;
-
-
-	return (cats);
-END
- ;;
-delimiter ;
-
--- ----------------------------
---  Function structure for `parent_cat_func`
--- ----------------------------
-DROP FUNCTION IF EXISTS `parent_cat_func`;
-delimiter ;;
-CREATE DEFINER=`curtDuser2`@`%` FUNCTION `parent_cat_func`(partNum INT) RETURNS varchar(100) CHARSET latin1
-BEGIN
-		
-	DECLARE cid INT;
-	DECLARE pid INT;
-	DECLARE catName VARCHAR(100);
-
-	-- Seed the variables - BAS 7/24/14
-	SELECT 	MIN(c.catID), c.parentID
-	INTO	cid, pid
-	FROM	Categories c
-	JOIN 	CatPart cp
-	ON		c.catID = cp.catID
-	WHERE	cp.partID = partNum;
-	
-	-- Reduce to parentID - BAS 7/25/14
-	numLoop: LOOP
-		IF pid = 0 THEN
-			LEAVE numLoop;
-		ELSE
-			SELECT 	c.catID, c.parentID
-			INTO	cid, pid
-			FROM	Categories c
-			WHERE	c.catID = pid;
-			ITERATE numLoop;
-		END IF;	
-	END LOOP numLoop;
-	
-	SELECT 	c.catTitle
-	INTO	catName
-	FROM 	Categories c
-	WHERE	catID = cid;
-	
-	return catName;
-END
- ;;
-delimiter ;
-
--- ----------------------------
---  Function structure for `partCategoryLoop`
--- ----------------------------
-DROP FUNCTION IF EXISTS `partCategoryLoop`;
-delimiter ;;
-CREATE DEFINER=`ninnemana`@`%` FUNCTION `partCategoryLoop`(partID int) RETURNS varchar(255) CHARSET latin1
-BEGIN
-	declare cats varchar(255);
-	declare parentID int;
-
-	declare title varchar(255);
-	set cats = "";
-
-	select c1.parentID, c1.catTitle into parentID, title from Categories as c1
-	join CatPart as cp on c1.catID = cp.catID
-	where cp.partID = partID
-	limit 1;
-
-
-	set cats = title;
-	WHILE parentID > 0 do
-
-		
-		select c2.catTitle, c2.parentID into title, parentID from Categories as c2
-		where catID = parentID
-		limit 1;
-		
-		set cats = CONCAT(title,'/',cats);
-	END WHILE;
-
-
-	return (cats);
-END
- ;;
-delimiter ;
-
--- ----------------------------
---  Triggers structure for table Content
--- ----------------------------
-CREATE TRIGGER `Content_INSERT` AFTER INSERT ON `Content` FOR EACH ROW BEGIN IF NEW.deleted THEN SET @changeType = 'DELETE'; ELSE SET @changeType ='NEW'; END IF; INSERT INTO Content_Revisions (userID,new_text,date,changeType,contentID,new_type) VALUES (NEW.userID,NEW.text,CURRENT_TIMESTAMP, @changeType, NEW.contentID, NEW.cTypeID); END;
-CREATE TRIGGER `Content_Update` AFTER UPDATE ON `Content` FOR EACH ROW BEGIN IF NEW.deleted THEN SET @changeType = 'DELETE'; ELSE SET @changeType = 'EDIT'; END IF; INSERT INTO Content_Revisions (userID,new_text,old_text, date, changeType,contentID,new_type,old_type) VALUES(NEW.userID,NEW.text,OLD.text,NOW(),@changeType, NEW.contentID,NEW.cTypeID,OLD.cTypeID); END;
-
--- ----------------------------
---  Triggers structure for table Content
--- ----------------------------
-CREATE TRIGGER `Content_INSERT` AFTER INSERT ON `Content` FOR EACH ROW BEGIN IF NEW.deleted THEN SET @changeType = 'DELETE'; ELSE SET @changeType ='NEW'; END IF; INSERT INTO Content_Revisions (userID,new_text,date,changeType,contentID,new_type) VALUES (NEW.userID,NEW.text,CURRENT_TIMESTAMP, @changeType, NEW.contentID, NEW.cTypeID); END;
-CREATE TRIGGER `Content_Update` AFTER UPDATE ON `Content` FOR EACH ROW BEGIN IF NEW.deleted THEN SET @changeType = 'DELETE'; ELSE SET @changeType = 'EDIT'; END IF; INSERT INTO Content_Revisions (userID,new_text,old_text, date, changeType,contentID,new_type,old_type) VALUES(NEW.userID,NEW.text,OLD.text,NOW(),@changeType, NEW.contentID,NEW.cTypeID,OLD.cTypeID); END;
-
--- ----------------------------
---  Triggers structure for table CustomerContent
--- ----------------------------
-CREATE TRIGGER `CustomerContent_INSERT` AFTER INSERT ON `CustomerContent` FOR EACH ROW BEGIN IF NEW.deleted THEN SET @changeType = 'DELETE'; ELSE SET @changeType ='NEW'; END IF; INSERT INTO CustomerContent_Revisions (userID,custID,new_text,date,changeType, contentID,new_type) VALUES (NEW.userID,NEW.custID,NEW.text,CURRENT_TIMESTAMP, @changeType, NEW.id, NEW.typeID); END;
-CREATE TRIGGER `CustomerContent_Update` AFTER UPDATE ON `CustomerContent` FOR EACH ROW BEGIN IF NEW.deleted THEN SET @changeType = 'DELETE'; ELSE SET @changeType = 'EDIT'; END IF; INSERT INTO CustomerContent_Revisions (userID,custID,new_text,old_text, date, changeType,contentID,new_type,old_type) VALUES(NEW.userID,NEW.custID,NEW.text,OLD.text,NOW(),@changeType, NEW.id,NEW.typeID,OLD.typeID); END;
-
--- ----------------------------
---  Triggers structure for table CustomerContent
--- ----------------------------
-CREATE TRIGGER `CustomerContent_INSERT` AFTER INSERT ON `CustomerContent` FOR EACH ROW BEGIN IF NEW.deleted THEN SET @changeType = 'DELETE'; ELSE SET @changeType ='NEW'; END IF; INSERT INTO CustomerContent_Revisions (userID,custID,new_text,date,changeType, contentID,new_type) VALUES (NEW.userID,NEW.custID,NEW.text,CURRENT_TIMESTAMP, @changeType, NEW.id, NEW.typeID); END;
-CREATE TRIGGER `CustomerContent_Update` AFTER UPDATE ON `CustomerContent` FOR EACH ROW BEGIN IF NEW.deleted THEN SET @changeType = 'DELETE'; ELSE SET @changeType = 'EDIT'; END IF; INSERT INTO CustomerContent_Revisions (userID,custID,new_text,old_text, date, changeType,contentID,new_type,old_type) VALUES(NEW.userID,NEW.custID,NEW.text,OLD.text,NOW(),@changeType, NEW.id,NEW.typeID,OLD.typeID); END;
-
--- ----------------------------
---  Triggers structure for table CustomerPartAttributes
--- ----------------------------
-CREATE TRIGGER `CustomerPartAttributes_Insert` AFTER INSERT ON `CustomerPartAttributes` FOR EACH ROW BEGIN 
-	IF NEW.deleted THEN 
-		SET @changeType = 'DELETE'; 
-	ELSE 
-		SET @changeType ='NEW'; 
-	END IF; 
-	INSERT INTO CustomerPartAttributes_Revisions
-		(userID,custID,new_field,new_value,changeType,attributeID)
-	VALUES
-		(NEW.userID,NEW.custID, NEW.fieldID, NEW.valueID, @changeType, NEW.id);
-END;
-CREATE TRIGGER `CustomerPartAttributes_Update` AFTER UPDATE ON `CustomerPartAttributes` FOR EACH ROW BEGIN
-	IF NEW.deleted THEN
-		SET @changeType = 'DELETE';
-	ELSE
-		SET @changeType = 'EDIT';
-	END IF;
-	INSERT INTO CustomerPartAttributes_Revisions 
-		(userID,custID,old_field,new_field,old_value,new_value,changeType,attributeID)
-	VALUES
-		(NEW.userID,NEW.custID,OLD.fieldID, NEW.fieldID, OLD.valueID, NEW.valueID, @changeType, NEW.id);
-END;
-
--- ----------------------------
---  Triggers structure for table CustomerPartAttributes
--- ----------------------------
-CREATE TRIGGER `CustomerPartAttributes_Insert` AFTER INSERT ON `CustomerPartAttributes` FOR EACH ROW BEGIN 
-	IF NEW.deleted THEN 
-		SET @changeType = 'DELETE'; 
-	ELSE 
-		SET @changeType ='NEW'; 
-	END IF; 
-	INSERT INTO CustomerPartAttributes_Revisions
-		(userID,custID,new_field,new_value,changeType,attributeID)
-	VALUES
-		(NEW.userID,NEW.custID, NEW.fieldID, NEW.valueID, @changeType, NEW.id);
-END;
-CREATE TRIGGER `CustomerPartAttributes_Update` AFTER UPDATE ON `CustomerPartAttributes` FOR EACH ROW BEGIN
-	IF NEW.deleted THEN
-		SET @changeType = 'DELETE';
-	ELSE
-		SET @changeType = 'EDIT';
-	END IF;
-	INSERT INTO CustomerPartAttributes_Revisions 
-		(userID,custID,old_field,new_field,old_value,new_value,changeType,attributeID)
-	VALUES
-		(NEW.userID,NEW.custID,OLD.fieldID, NEW.fieldID, OLD.valueID, NEW.valueID, @changeType, NEW.id);
-END;
-
--- ----------------------------
---  Triggers structure for table Survey
--- ----------------------------
-CREATE TRIGGER `Survey_Insert` AFTER INSERT ON `Survey` FOR EACH ROW BEGIN
-	IF NEW.deleted THEN SET @changeType = 'DELETE'; ELSE SET @changeType = 'NEW'; END IF;
-
-	INSERT INTO Survey_Revisions(userID, new_name, date, changeType, surveyID)
-	VALUES(NEW.userID, NEW.name, CURRENT_TIMESTAMP, @changeType, NEW.id);
-END;
-CREATE TRIGGER `Survey_Update` AFTER UPDATE ON `Survey` FOR EACH ROW BEGIN
-	IF NEW.deleted THEN SET @changeType = 'DELETE'; ELSE SET @changeType = 'EDIT'; END IF;
-
-	INSERT INTO Survey_Revisions(userID, new_name, old_name, date, changeType, surveyID)
-	VALUES(NEW.userID, NEW.name, OLD.name, NOW(), @changeType, NEW.id);
-END;
-
--- ----------------------------
---  Triggers structure for table Survey
--- ----------------------------
-CREATE TRIGGER `Survey_Insert` AFTER INSERT ON `Survey` FOR EACH ROW BEGIN
-	IF NEW.deleted THEN SET @changeType = 'DELETE'; ELSE SET @changeType = 'NEW'; END IF;
-
-	INSERT INTO Survey_Revisions(userID, new_name, date, changeType, surveyID)
-	VALUES(NEW.userID, NEW.name, CURRENT_TIMESTAMP, @changeType, NEW.id);
-END;
-CREATE TRIGGER `Survey_Update` AFTER UPDATE ON `Survey` FOR EACH ROW BEGIN
-	IF NEW.deleted THEN SET @changeType = 'DELETE'; ELSE SET @changeType = 'EDIT'; END IF;
-
-	INSERT INTO Survey_Revisions(userID, new_name, old_name, date, changeType, surveyID)
-	VALUES(NEW.userID, NEW.name, OLD.name, NOW(), @changeType, NEW.id);
-END;
-
--- ----------------------------
---  Triggers structure for table SurveyAnswer
--- ----------------------------
-CREATE TRIGGER `SurveyAnswers_Insert` AFTER INSERT ON `SurveyAnswer` FOR EACH ROW BEGIN
-	IF NEW.deleted THEN SET @changeType = 'DELETE'; ELSE SET @changeType = 'NEW'; END IF;
-
-	INSERT INTO SurveyAnswer_Revisions(userID, new_answer, date, changeType, answerID)
-	VALUES(NEW.userID, NEW.answer, NOW(), @changeType, NEW.id);
-END;
-CREATE TRIGGER `SurveyAnswers_Update` AFTER UPDATE ON `SurveyAnswer` FOR EACH ROW BEGIN
-	IF NEW.deleted THEN
-		SET @changeType = 'DELETE';
-	ELSE
-		SET @changeType = 'EDIT';
-	END IF;
-
-	INSERT INTO SurveyAnswer_Revisions(userID, new_answer, old_answer, date, changeType, answerID)
-	VALUES(NEW.userID, NEW.answer, OLD.answer, NOW(), @changeType, NEW.id);
-END;
-
--- ----------------------------
---  Triggers structure for table SurveyAnswer
--- ----------------------------
-CREATE TRIGGER `SurveyAnswers_Insert` AFTER INSERT ON `SurveyAnswer` FOR EACH ROW BEGIN
-	IF NEW.deleted THEN SET @changeType = 'DELETE'; ELSE SET @changeType = 'NEW'; END IF;
-
-	INSERT INTO SurveyAnswer_Revisions(userID, new_answer, date, changeType, answerID)
-	VALUES(NEW.userID, NEW.answer, NOW(), @changeType, NEW.id);
-END;
-CREATE TRIGGER `SurveyAnswers_Update` AFTER UPDATE ON `SurveyAnswer` FOR EACH ROW BEGIN
-	IF NEW.deleted THEN
-		SET @changeType = 'DELETE';
-	ELSE
-		SET @changeType = 'EDIT';
-	END IF;
-
-	INSERT INTO SurveyAnswer_Revisions(userID, new_answer, old_answer, date, changeType, answerID)
-	VALUES(NEW.userID, NEW.answer, OLD.answer, NOW(), @changeType, NEW.id);
-END;
-
--- ----------------------------
---  Triggers structure for table SurveyPrize
--- ----------------------------
-CREATE TRIGGER `SurveyPrize_Insert` AFTER INSERT ON `SurveyPrize` FOR EACH ROW BEGIN
-	IF NEW.deleted THEN SET @changeType = 'DELETE'; ELSE SET @changeType = 'NEW'; END IF;
-
-	INSERT INTO SurveyPrize_Revisions(userID, new_title, new_description, new_image, date, changeType, prizeID)
-	VALUES(NEW.userID, NEW.title, NEW.description, NEW.image, NOW(), @changeType, NEW.id);
-END;
-CREATE TRIGGER `SurveyPrize_Update` AFTER UPDATE ON `SurveyPrize` FOR EACH ROW BEGIN
-	IF NEW.deleted THEN
-		SET @changeType = 'DELETE';
-	ELSE
-		SET @changeType = 'EDIT';
-	END IF;
-
-	INSERT INTO SurveyPrize_Revisions(userID, new_title, old_title, new_description, old_description, new_image, old_image, date, changeType, prizeID)
-	VALUES(NEW.userID, NEW.title, OLD.title, NEW.description, OLD.description, NEW.image, OLD.image, NOW(), @changeType, NEW.id);
-END;
-
--- ----------------------------
---  Triggers structure for table SurveyPrize
--- ----------------------------
-CREATE TRIGGER `SurveyPrize_Insert` AFTER INSERT ON `SurveyPrize` FOR EACH ROW BEGIN
-	IF NEW.deleted THEN SET @changeType = 'DELETE'; ELSE SET @changeType = 'NEW'; END IF;
-
-	INSERT INTO SurveyPrize_Revisions(userID, new_title, new_description, new_image, date, changeType, prizeID)
-	VALUES(NEW.userID, NEW.title, NEW.description, NEW.image, NOW(), @changeType, NEW.id);
-END;
-CREATE TRIGGER `SurveyPrize_Update` AFTER UPDATE ON `SurveyPrize` FOR EACH ROW BEGIN
-	IF NEW.deleted THEN
-		SET @changeType = 'DELETE';
-	ELSE
-		SET @changeType = 'EDIT';
-	END IF;
-
-	INSERT INTO SurveyPrize_Revisions(userID, new_title, old_title, new_description, old_description, new_image, old_image, date, changeType, prizeID)
-	VALUES(NEW.userID, NEW.title, OLD.title, NEW.description, OLD.description, NEW.image, OLD.image, NOW(), @changeType, NEW.id);
-END;
-
--- ----------------------------
---  Triggers structure for table SurveyQuestion
--- ----------------------------
-CREATE TRIGGER `SurveyQuestion_Insert` AFTER INSERT ON `SurveyQuestion` FOR EACH ROW BEGIN
-	IF NEW.deleted THEN
-		SET @changeType = 'DELETE';
-		ELSE SET @changeType = 'NEW';
-	END IF;
-
-	INSERT INTO SurveyQuestion_Revisions(userID, new_question, date, changeType, questionID, new_survey)
-	VALUES(NEW.userID, NEW.question, CURRENT_TIMESTAMP, @changeType, NEW.id, NEW.surveyID);
-END;
-CREATE TRIGGER `SurveyQuestion_Update` AFTER UPDATE ON `SurveyQuestion` FOR EACH ROW BEGIN
-	IF NEW.deleted THEN
-		SET @changeType = 'DELETE';
-	ELSE
-		SET @changeType = 'EDIT';
-	END IF;
-
-	INSERT INTO SurveyQuestion_Revisions(userID, new_question, old_question, date, changeType, questionID, new_survey, old_survey)
-	VALUES(NEW.userID, NEW.question, OLD.question, NOW(), @changeType, NEW.id, NEW.surveyID, OLD.surveyID);
-END;
-
--- ----------------------------
---  Triggers structure for table SurveyQuestion
--- ----------------------------
-CREATE TRIGGER `SurveyQuestion_Insert` AFTER INSERT ON `SurveyQuestion` FOR EACH ROW BEGIN
-	IF NEW.deleted THEN
-		SET @changeType = 'DELETE';
-		ELSE SET @changeType = 'NEW';
-	END IF;
-
-	INSERT INTO SurveyQuestion_Revisions(userID, new_question, date, changeType, questionID, new_survey)
-	VALUES(NEW.userID, NEW.question, CURRENT_TIMESTAMP, @changeType, NEW.id, NEW.surveyID);
-END;
-CREATE TRIGGER `SurveyQuestion_Update` AFTER UPDATE ON `SurveyQuestion` FOR EACH ROW BEGIN
-	IF NEW.deleted THEN
-		SET @changeType = 'DELETE';
-	ELSE
-		SET @changeType = 'EDIT';
-	END IF;
-
-	INSERT INTO SurveyQuestion_Revisions(userID, new_question, old_question, date, changeType, questionID, new_survey, old_survey)
-	VALUES(NEW.userID, NEW.question, OLD.question, NOW(), @changeType, NEW.id, NEW.surveyID, OLD.surveyID);
-END;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 SET FOREIGN_KEY_CHECKS = 1;
