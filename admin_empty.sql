@@ -37,7 +37,7 @@ CREATE TABLE `OAuthConfigurations` (
   `redirectUrl` varchar(500) NOT NULL,
   `service` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 --  Table structure for `OAuthModuleConfigs`
@@ -50,7 +50,7 @@ CREATE TABLE `OAuthModuleConfigs` (
   PRIMARY KEY (`id`),
   KEY `configID` (`configID`),
   KEY `moduleID` (`moduleID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 --  Table structure for `module`
@@ -63,7 +63,7 @@ CREATE TABLE `module` (
   `img_path` varchar(255) DEFAULT NULL,
   `display` tinyint(4) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 --  Table structure for `user`
@@ -82,7 +82,7 @@ CREATE TABLE `user` (
   `photo` varchar(500) DEFAULT NULL,
   `encpassword` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 --  Table structure for `user_module`
@@ -93,6 +93,6 @@ CREATE TABLE `user_module` (
   `userID` int(11) NOT NULL,
   `moduleID` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1526 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=1526 DEFAULT CHARSET=latin1;
 
 SET FOREIGN_KEY_CHECKS = 1;
