@@ -38,7 +38,7 @@ CREATE TABLE `ActivatedWarranties` (
   `fname` varchar(255) DEFAULT NULL,
   `lname` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `part` int(11) DEFAULT NULL,
+  `part` varchar(11) DEFAULT NULL,
   `date_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `Part_FK` (`part`),
@@ -323,7 +323,7 @@ DROP TABLE IF EXISTS `CatPart`;
 CREATE TABLE `CatPart` (
   `catPartID` int(11) NOT NULL AUTO_INCREMENT,
   `catID` int(11) NOT NULL,
-  `partID` int(11) NOT NULL,
+  `partID` varchar(11) NOT NULL,
   PRIMARY KEY (`catPartID`),
   KEY `IX_CatPart_Cat_Part` (`catID`,`partID`),
   KEY `FK__CatPart__partID__54945AAA` (`partID`),
@@ -601,7 +601,7 @@ DROP TABLE IF EXISTS `ContentBridge`;
 CREATE TABLE `ContentBridge` (
   `cBridgeID` int(11) NOT NULL AUTO_INCREMENT,
   `catID` int(11) DEFAULT NULL,
-  `partID` int(11) DEFAULT NULL,
+  `partID` varchar(11) DEFAULT NULL,
   `contentID` int(11) NOT NULL,
   PRIMARY KEY (`cBridgeID`),
   KEY `IX_ContentBridge_catIDContent` (`catID`,`contentID`),
@@ -621,7 +621,7 @@ CREATE TABLE `ContentType` (
   `type` varchar(255) DEFAULT NULL,
   `allowHTML` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`cTypeID`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `Content_Revisions`
@@ -866,7 +866,7 @@ CREATE TABLE `CustomerPartAttributes` (
   `added` datetime NOT NULL,
   `modified` datetime NOT NULL,
   `deleted` tinyint(1) unsigned zerofill NOT NULL,
-  `partID` int(11) NOT NULL,
+  `partID` varchar(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `id_idx` (`fieldID`),
@@ -1178,8 +1178,8 @@ CREATE TABLE `IPBlock` (
 DROP TABLE IF EXISTS `IncludedPart`;
 CREATE TABLE `IncludedPart` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `partID` int(11) NOT NULL,
-  `includedID` int(11) NOT NULL,
+  `partID` varchar(11) NOT NULL,
+  `includedID` varchar(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK__IncludedP__partI__33DF3ACD` (`partID`),
   KEY `FK__IncludedP__inclu__34D35F06` (`includedID`),
@@ -1194,7 +1194,7 @@ DROP TABLE IF EXISTS `KioskOrderItems`;
 CREATE TABLE `KioskOrderItems` (
   `itemID` int(11) NOT NULL AUTO_INCREMENT,
   `orderID` int(11) NOT NULL,
-  `partID` int(11) NOT NULL,
+  `partID` varchar(11) NOT NULL,
   `quantity` int(11) NOT NULL,
   `price` decimal(19,4) NOT NULL,
   `isFulfilled` int(11) NOT NULL DEFAULT '0',
@@ -1554,7 +1554,7 @@ CREATE TABLE `PackageType` (
 -- ----------------------------
 DROP TABLE IF EXISTS `Part`;
 CREATE TABLE `Part` (
-  `partID` int(11) NOT NULL,
+  `partID` varchar(11) NOT NULL,
   `status` int(11) NOT NULL,
   `dateModified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `dateAdded` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -1576,7 +1576,7 @@ CREATE TABLE `Part` (
 DROP TABLE IF EXISTS `PartAttribute`;
 CREATE TABLE `PartAttribute` (
   `pAttrID` int(11) NOT NULL AUTO_INCREMENT,
-  `partID` int(11) NOT NULL,
+  `partID` varchar(11) NOT NULL,
   `value` varchar(255) DEFAULT NULL,
   `field` varchar(255) DEFAULT NULL,
   `sort` int(11) NOT NULL DEFAULT '1',
@@ -1602,7 +1602,7 @@ DROP TABLE IF EXISTS `PartGroupPart`;
 CREATE TABLE `PartGroupPart` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `partGroupID` int(11) NOT NULL,
-  `partID` int(11) NOT NULL,
+  `partID` varchar(11) NOT NULL,
   `sort` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `FK__PartGroup__partG__2D323D3E` (`partGroupID`),
@@ -1633,7 +1633,7 @@ CREATE TABLE `PartImages` (
   `path` varchar(500) NOT NULL,
   `height` int(11) NOT NULL,
   `width` int(11) NOT NULL,
-  `partID` int(11) NOT NULL,
+  `partID` varchar(11) NOT NULL,
   PRIMARY KEY (`imageID`),
   KEY `IX_PartImages_Part` (`partID`),
   KEY `IX_PartImages_Size` (`sizeID`),
@@ -1658,7 +1658,7 @@ CREATE TABLE `PartIndex` (
 DROP TABLE IF EXISTS `PartPackage`;
 CREATE TABLE `PartPackage` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `partID` int(11) NOT NULL,
+  `partID` varchar(11) NOT NULL,
   `height` double DEFAULT NULL,
   `width` double DEFAULT NULL,
   `length` double DEFAULT NULL,
@@ -1685,7 +1685,7 @@ CREATE TABLE `PartPackage` (
 DROP TABLE IF EXISTS `PartVideo`;
 CREATE TABLE `PartVideo` (
   `pVideoID` int(11) NOT NULL AUTO_INCREMENT,
-  `partID` int(11) NOT NULL,
+  `partID` varchar(11) NOT NULL,
   `video` varchar(255) NOT NULL,
   `vTypeID` int(11) NOT NULL,
   `isPrimary` tinyint(1) NOT NULL,
@@ -1736,7 +1736,7 @@ CREATE TABLE `Posts` (
 DROP TABLE IF EXISTS `Price`;
 CREATE TABLE `Price` (
   `priceID` int(11) NOT NULL AUTO_INCREMENT,
-  `partID` int(11) NOT NULL,
+  `partID` varchar(11) NOT NULL,
   `priceType` varchar(255) DEFAULT NULL,
   `price` decimal(8,2) NOT NULL,
   `enforced` tinyint(1) NOT NULL DEFAULT '0',
@@ -1795,7 +1795,7 @@ CREATE TABLE `ReportType` (
 DROP TABLE IF EXISTS `Review`;
 CREATE TABLE `Review` (
   `reviewID` int(11) NOT NULL AUTO_INCREMENT,
-  `partID` int(11) DEFAULT NULL,
+  `partID` varchar(11) DEFAULT NULL,
   `rating` int(11) NOT NULL,
   `subject` varchar(255) DEFAULT NULL,
   `review_text` longtext,
@@ -2265,7 +2265,7 @@ DROP TABLE IF EXISTS `VehiclePart`;
 CREATE TABLE `VehiclePart` (
   `vPartID` int(11) NOT NULL AUTO_INCREMENT,
   `vehicleID` int(11) NOT NULL,
-  `partID` int(11) NOT NULL,
+  `partID` varchar(11) NOT NULL,
   `drilling` varchar(100) DEFAULT NULL,
   `exposed` varchar(100) DEFAULT NULL,
   `installTime` int(11) DEFAULT NULL,
@@ -2556,7 +2556,7 @@ DROP TABLE IF EXISTS `vcdb_VehiclePart`;
 CREATE TABLE `vcdb_VehiclePart` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `VehicleID` int(11) NOT NULL,
-  `PartNumber` int(11) NOT NULL,
+  `PartNumber` varchar(11) NOT NULL,
   PRIMARY KEY (`ID`),
   KEY `AAIA_VehiclePart_Part_IX` (`VehicleID`,`PartNumber`),
   KEY `FK__vcdb_Vehi__PartN__273A381D` (`PartNumber`),
