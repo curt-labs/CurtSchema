@@ -347,6 +347,7 @@ CREATE TABLE `Categories` (
   `codeID` int(11) NOT NULL DEFAULT '0',
   `sort` int(11) NOT NULL DEFAULT '1',
   `vehicleSpecific` tinyint(1) NOT NULL DEFAULT '0',
+  `vehicleRequired` tinyint(1) NOT NULL DEFAULT '0',
   `metaTitle` text,
   `metaDesc` text,
   `metaKeywords` text,
