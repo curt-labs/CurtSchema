@@ -2385,6 +2385,24 @@ CREATE TABLE `VideoNew` (
 ) ENGINE=MyISAM AUTO_INCREMENT=208 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+--  Table structure for `Warehouses`
+-- ----------------------------
+DROP TABLE IF EXISTS `Warehouses`;
+CREATE TABLE `Warehouses` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `address` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `city` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `stateID` int(11) NOT NULL,
+  `postalCode` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `tollFreePhone` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
+  `fax` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
+  `localPhone` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
+  `manager` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
 --  Table structure for `WebPropNotes`
 -- ----------------------------
 DROP TABLE IF EXISTS `WebPropNotes`;
