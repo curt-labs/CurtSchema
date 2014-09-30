@@ -2399,6 +2399,8 @@ CREATE TABLE `Warehouses` (
   `fax` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
   `localPhone` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
   `manager` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
+  `longitude` double CHARACTER SET latin1 DEFAULT NULL,
+  `latitude` double CHARACTER SET latin1 DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
