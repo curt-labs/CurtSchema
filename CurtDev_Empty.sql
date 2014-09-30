@@ -2390,17 +2390,17 @@ CREATE TABLE `VideoNew` (
 DROP TABLE IF EXISTS `Warehouses`;
 CREATE TABLE `Warehouses` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET latin1 NOT NULL,
-  `address` varchar(255) CHARACTER SET latin1 NOT NULL,
-  `city` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `city` varchar(255) NOT NULL,
   `stateID` int(11) NOT NULL,
-  `postalCode` varchar(255) CHARACTER SET latin1 NOT NULL,
-  `tollFreePhone` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
-  `fax` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
-  `localPhone` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
-  `manager` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
-  `longitude` double CHARACTER SET latin1 DEFAULT NULL,
-  `latitude` double CHARACTER SET latin1 DEFAULT NULL,
+  `postalCode` varchar(255) NOT NULL,
+  `tollFreePhone` varchar(255) DEFAULT NULL,
+  `fax` varchar(255) DEFAULT NULL,
+  `localPhone` varchar(255) DEFAULT NULL,
+  `manager` varchar(255) DEFAULT NULL,
+  `longitude` double DEFAULT NULL,
+  `latitude` double DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
