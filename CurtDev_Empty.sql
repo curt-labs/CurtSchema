@@ -1450,6 +1450,7 @@ CREATE TABLE `Menu` (
   `requireAuthentication` tinyint(1) NOT NULL DEFAULT '0',
   `showOnSitemap` tinyint(1) NOT NULL DEFAULT '0',
   `sort` int(11) NOT NULL DEFAULT '1',
+  `websiteID` int(11) NOT NULL DEFAULT '1'
   PRIMARY KEY (`menuID`)
 ) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
@@ -1855,6 +1856,7 @@ CREATE TABLE `SiteContent` (
   `slug` varchar(500) DEFAULT NULL,
   `requireAuthentication` tinyint(1) NOT NULL DEFAULT '0',
   `canonical` varchar(255) DEFAULT NULL,
+  `websiteID` int(11) NOT NULL DEFAULT '1'
   PRIMARY KEY (`contentID`)
 ) ENGINE=MyISAM AUTO_INCREMENT=68 DEFAULT CHARSET=utf8;
 
