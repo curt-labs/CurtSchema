@@ -2279,6 +2279,12 @@ CREATE TABLE `VehiclePart` (
 ) ENGINE=InnoDB AUTO_INCREMENT=45438 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+--  Triggers structure for table VehiclePart
+-- ----------------------------
+CREATE TRIGGER `ModifyPart` AFTER INSERT ON `VehiclePart` FOR EACH ROW update Part set dateModified = NOW()
+where partID = NEW.partID;
+
+-- ----------------------------
 --  Table structure for `VehiclePartAttribute`
 -- ----------------------------
 DROP TABLE IF EXISTS `VehiclePartAttribute`;
