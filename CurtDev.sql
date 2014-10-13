@@ -1201,7 +1201,7 @@ CREATE TABLE `Inventory` (
   `warehouseID` int(11) NOT NULL,
   `partID` int(11) NOT NULL,
   `available` int(11) NOT NULL,
-  `dateUpdated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `dateUpdated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `partID` (`partID`),
   KEY `warehouseID` (`warehouseID`),
