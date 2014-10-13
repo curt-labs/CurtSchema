@@ -1205,7 +1205,7 @@ CREATE TABLE `Inventory` (
   KEY `warehouseID` (`warehouseID`),
   CONSTRAINT `InventoryTopart` FOREIGN KEY (`partID`) REFERENCES `Part` (`partID`),
   CONSTRAINT `InventoryToWarehouse` FOREIGN KEY (`warehouseID`) REFERENCES `Warehouses` (`id`)
-) ENGINE=InnoDB DEFAULT DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `KioskOrderItems`
