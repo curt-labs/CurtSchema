@@ -19,6 +19,9 @@ CREATE DATABASE IF NOT EXISTS CurtDev_Empty;
 SET NAMES utf8;
 SET FOREIGN_KEY_CHECKS = 0;
 
+GRANT USAGE ON *.* TO curtDuser2 IDENTIFIED BY 'eC0mm3rc3';
+GRANT ALL PRIVILEGES ON CurtDev_Empty.* TO curtDuser2;
+
 -- ----------------------------
 --  Table structure for `AcesType`
 -- ----------------------------
@@ -2614,3 +2617,375 @@ CREATE TABLE `videoType` (
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 SET FOREIGN_KEY_CHECKS = 1;
+
+--
+-- Dumping routines (PROCEDURE) for database 'CurtDev'
+--
+DELIMITER ;;
+
+# Dump of PROCEDURE active_parts_proc
+# ------------------------------------------------------------
+
+/*!50003 SET @OLD_FOREIGN_KEY_CHECKS=(select @@SESSION.FOREIGN_KEY_CHECKS) */;;
+/*!50003 SET @OLD_SQL_NOTES=(select @@SESSION.SQL_NOTES) */;;
+/*!50003 SET @OLD_CHARACTER_SET_CLIENT=(select @@SESSION.CHARACTER_SET_CLIENT) */;;
+/*!50003 SET @OLD_CHARACTER_SET_RESULTS=(select @@SESSION.CHARACTER_SET_RESULTS) */;;
+/*!50003 SET @OLD_COLLATION_CONNECTION=(select @@SESSION.COLLATION_CONNECTION) */;;
+
+/*!50003 SET @OLD_SQL_MODE=(select @@SESSION.sql_mode) */;;
+/*!50003 DROP PROCEDURE IF EXISTS `active_parts_proc` */;;
+/*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION"*/;;
+/*!50003 CREATE*/ /*!50020 DEFINER=`curtDuser2`@`%`*/ /*!50003 PROCEDURE `active_parts_proc`()
+BEGIN
+
+	DROP TEMPORARY TABLE IF EXISTS temp;
+	CREATE TEMPORARY TABLE IF NOT EXISTS temp (
+		tempID INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+		partID INTEGER NULL,
+		AcesID INTEGER NULL,
+		shortDesc VARCHAR(500) NULL,
+		listDesc LONGTEXT NULL,
+		jobberPrice DECIMAL(12,2) NULL,
+		listPrice DECIMAL(12,2) NULL,
+		height DECIMAL(12,2) NULL,
+		width DECIMAL(12,2) NULL,
+		length DECIMAL(12,2) NULL,
+		weight DECIMAL(12,2) NULL
+	);
+
+	INSERT INTO temp (partID)
+	SELECT p.partID
+	FROM Part p
+	WHERE p.status = 800;
+
+	UPDATE temp as t, Part as pt
+	SET t.AcesID = pt.ACESPartTypeID
+	WHERE t.partID = pt.partID
+	AND	pt.status = 800;
+
+	UPDATE temp as t, Part as pt
+	SET t.shortDesc = pt.shortDesc
+	WHERE t.partID = pt.partID
+	AND	pt.status = 800;
+
+	UPDATE temp as t, Content as c, ContentBridge as cb
+	SET t.listDesc = c.text
+	WHERE t.partID = cb.partID
+	AND	  cb.contentID = c.contentID
+	AND c.cTypeID = 11;
+
+	UPDATE temp as t, Price as pr
+	SET t.jobberPrice = pr.price
+	WHERE t.partID = pr.partID
+	AND	pr.priceType = "Jobber";
+
+	UPDATE temp as t, Price as pr
+	SET t.listPrice = pr.price
+	WHERE t.partID = pr.partID
+	AND	pr.priceType = "List";
+
+	UPDATE temp as t, PartPackage pk
+	SET t.length = pk.length,
+		t.width = pk.width,
+		t.height = pk.height,
+		t.weight = pk.weight
+	WHERE t.partID = pk.partID;
+
+	SELECT * FROM temp;
+	DROP TEMPORARY TABLE IF EXISTS temp;
+END */;;
+
+/*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE */;;
+# Dump of PROCEDURE global_indust_proc
+# ------------------------------------------------------------
+
+/*!50003 DROP PROCEDURE IF EXISTS `global_indust_proc` */;;
+/*!50003 SET @OLD_SQL_MODE=(select @@SESSION.sql_mode) */;;
+/*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION"*/;;
+/*!50003 CREATE*/ /*!50020 DEFINER=`curtDuser2`@`%`*/ /*!50003 PROCEDURE `global_indust_proc`()
+BEGIN
+
+	DECLARE cnt INT DEFAULT 1;
+	DECLARE catName VARCHAR(50);
+
+	DROP TEMPORARY TABLE IF EXISTS temp;
+	CREATE TEMPORARY TABLE IF NOT EXISTS temp (
+		tempID INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+		partID INTEGER NULL,
+		shortDesc VARCHAR(500) NULL,
+		listDesc LONGTEXT NULL,
+		listPrice DECIMAL(12,2) NULL,
+		UPC VARCHAR(255) NULL,
+		length DECIMAL(12,2) NULL,
+		width DECIMAL(12,2) NULL,
+		height DECIMAL(12,2) NULL,
+		weight DECIMAL(12,2) NULL,
+		parentCategory VARCHAR(50) NULL DEFAULT "",
+		material VARCHAR(50) NULL DEFAULT "",
+		finish VARCHAR(50) NULL DEFAULT "",
+		ballDiameter VARCHAR(50) NULL DEFAULT "",
+		hitchDrop VARCHAR(50) NULL DEFAULT "",
+		rise VARCHAR(50) NULL DEFAULT "",
+		ballHole VARCHAR(50) NULL DEFAULT "",
+		shankLength VARCHAR(50) NULL DEFAULT "",
+		shankDiameter VARCHAR(50) NULL DEFAULT "",
+		recTubeSize VARCHAR(50) NULL DEFAULT ""
+	);
+
+	INSERT INTO temp (partID)
+	SELECT p.partID
+	FROM Part p
+	WHERE p.status = 800;
+
+	UPDATE temp as t, Part as pt
+	SET t.shortDesc = pt.shortDesc
+	WHERE t.partID = pt.partID
+	AND	pt.status = 800;
+
+	UPDATE temp as t, Content as c, ContentBridge as cb
+	SET t.listDesc = c.text
+	WHERE t.partID = cb.partID
+	AND	  cb.contentID = c.contentID
+	AND c.cTypeID = 11;
+
+	UPDATE temp as t, Price as pr
+	SET t.listPRice = pr.price
+	WHERE t.partID = pr.partID
+	AND	pr.priceType = "List";
+
+	UPDATE temp as t, PartAttribute pa
+	SET t.UPC = pa.value
+	WHERE t.partID = pa.partID
+	AND pa.field = "UPC";
+
+	UPDATE temp as t, PartPackage pk
+	SET t.length = pk.length,
+		t.width = pk.width,
+		t.height = pk.height,
+		t.weight = pk.weight
+	WHERE t.partID = pk.partID;
+
+	UPDATE temp as t, PartAttribute pa
+	SET t.material = pa.value
+	WHERE t.partID = pa.partID
+	AND pa.field = "Material";
+
+	UPDATE temp as t, PartAttribute pa
+	SET t.finish = pa.value
+	WHERE t.partID = pa.partID
+	AND pa.field = "Finish";
+
+	UPDATE temp as t, PartAttribute pa
+	SET t.ballDiameter = pa.value
+	WHERE t.partID = pa.partID
+	AND pa.field = "Ball Diameter";
+
+	UPDATE temp as t, PartAttribute pa
+	SET t.hitchDrop = pa.value
+	WHERE t.partID = pa.partID
+	AND pa.field = "Drop";
+
+	UPDATE temp as t, PartAttribute pa
+	SET t.rise = pa.value
+	WHERE t.partID = pa.partID
+	AND pa.field = "Rise";
+
+	UPDATE temp as t, PartAttribute pa
+	SET t.ballHole = pa.value
+	WHERE t.partID = pa.partID
+	AND pa.field = "Ball Hole";
+
+	UPDATE temp as t, PartAttribute pa
+	SET t.shankLength = pa.value
+	WHERE t.partID = pa.partID
+	AND pa.field = "Shank Length";
+
+	UPDATE temp as t, PartAttribute pa
+	SET t.shankDiameter = pa.value
+	WHERE t.partID = pa.partID
+	AND pa.field = "Shank Diameter";
+
+	UPDATE temp as t, PartAttribute pa
+	SET t.recTubeSize = pa.value
+	WHERE t.partID = pa.partID
+	AND pa.field = "Receiver Tube Size";
+
+	UPDATE temp as t, Part as p
+	SET t.parentCategory = (SELECT parent_cat_func(p.partID))
+	WHERE t.partID = p.partID;
+
+	SELECT * FROM temp;
+	DROP TEMPORARY TABLE IF EXISTS temp;
+
+END */;;
+
+/*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE */;;
+DELIMITER ;
+
+--
+-- Dumping routines (FUNCTION) for database 'CurtDev'
+--
+DELIMITER ;;
+
+# Dump of FUNCTION bottom_category_ids
+# ------------------------------------------------------------
+
+/*!50003 DROP FUNCTION IF EXISTS `bottom_category_ids` */;;
+/*!50003 SET @OLD_SQL_MODE=(select @@SESSION.sql_mode) */;;
+/*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION"*/;;
+/*!50003 CREATE*/ /*!50020 DEFINER=`curtDuser2`@`%`*/ /*!50003 FUNCTION `bottom_category_ids`(id int) RETURNS varchar(255) CHARSET latin1 COLLATE latin1_general_ci
+    DETERMINISTIC
+BEGIN
+
+	declare IDS varchar(255);
+	declare tmpIDS varchar(255);
+	declare currentIDS varchar(255);
+	declare catCount int(11);
+	set @IDS = '';
+	set @tmpIDS = '';
+	set @currentIDS = '';
+	set @catCount = 0;
+
+	select group_concat(distinct c1.catID), count(catID) into @tmpIDS, @catCount from Categories as c1
+	where parentID = id || catID = id;
+
+	set @IDS = @tmpIDS;
+	while @catCount != 0 do
+
+		set @currentIDS = @tmpIDS;
+		select group_concat(distinct catID), count(distinct catID) into @tmpIDS, @catCount from Categories
+		where FIND_IN_SET(parentID, @currentIDS);
+
+		if @catCount != 0 then
+			set @IDS = CONCAT(@tmpIDS, ',',@IDS);
+		end if;
+
+	end while;
+
+	return @IDS;
+END */;;
+
+/*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE */;;
+# Dump of FUNCTION categoryLoop
+# ------------------------------------------------------------
+
+/*!50003 DROP FUNCTION IF EXISTS `categoryLoop` */;;
+/*!50003 SET @OLD_SQL_MODE=(select @@SESSION.sql_mode) */;;
+/*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION"*/;;
+/*!50003 CREATE*/ /*!50020 DEFINER=`curtDuser2`@`%`*/ /*!50003 FUNCTION `categoryLoop`(categoryID int) RETURNS varchar(255) CHARSET latin1 COLLATE latin1_general_ci
+BEGIN
+
+	declare cats varchar(255);
+	declare parentID int;
+
+	declare title varchar(255);
+	set cats = "";
+
+	select c1.parentID, c1.catTitle into parentID, title from Categories as c1
+	join CatPart as cp on c1.catID = cp.catID
+	where c1.catID = categoryID
+	limit 1;
+
+
+	set cats = title;
+	WHILE parentID > 0 do
+
+
+		select c2.catTitle, c2.parentID into title, parentID from Categories as c2
+		where catID = parentID
+		limit 1;
+
+		set cats = CONCAT(title,'/',cats);
+	END WHILE;
+
+
+	return (cats);
+END */;;
+
+/*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE */;;
+# Dump of FUNCTION parent_cat_func
+# ------------------------------------------------------------
+
+/*!50003 DROP FUNCTION IF EXISTS `parent_cat_func` */;;
+/*!50003 SET @OLD_SQL_MODE=(select @@SESSION.sql_mode) */;;
+/*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION"*/;;
+/*!50003 CREATE*/ /*!50020 DEFINER=`curtDuser2`@`%`*/ /*!50003 FUNCTION `parent_cat_func`(partNum INT) RETURNS varchar(100) CHARSET latin1 COLLATE latin1_general_ci
+BEGIN
+
+	DECLARE cid INT;
+	DECLARE pid INT;
+	DECLARE catName VARCHAR(100);
+
+	-- Seed the variables - BAS 7/24/14
+	SELECT 	MIN(c.catID), c.parentID
+	INTO	cid, pid
+	FROM	Categories c
+	JOIN 	CatPart cp
+	ON		c.catID = cp.catID
+	WHERE	cp.partID = partNum;
+
+	-- Reduce to parentID - BAS 7/25/14
+	numLoop: LOOP
+		IF pid = 0 THEN
+			LEAVE numLoop;
+		ELSE
+			SELECT 	c.catID, c.parentID
+			INTO	cid, pid
+			FROM	Categories c
+			WHERE	c.catID = pid;
+			ITERATE numLoop;
+		END IF;
+	END LOOP numLoop;
+
+	SELECT 	c.catTitle
+	INTO	catName
+	FROM 	Categories c
+	WHERE	catID = cid;
+
+	return catName;
+END */;;
+
+/*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE */;;
+# Dump of FUNCTION partCategoryLoop
+# ------------------------------------------------------------
+
+/*!50003 DROP FUNCTION IF EXISTS `partCategoryLoop` */;;
+/*!50003 SET @OLD_SQL_MODE=(select @@SESSION.sql_mode) */;;
+/*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION"*/;;
+/*!50003 CREATE*/ /*!50020 DEFINER=`curtDuser2`@`%`*/ /*!50003 FUNCTION `partCategoryLoop`(partID int) RETURNS varchar(255) CHARSET latin1 COLLATE latin1_general_ci
+BEGIN
+	declare cats varchar(255);
+	declare parentID int;
+
+	declare title varchar(255);
+	set cats = "";
+
+	select c1.parentID, c1.catTitle into parentID, title from Categories as c1
+	join CatPart as cp on c1.catID = cp.catID
+	where cp.partID = partID
+	limit 1;
+
+
+	set cats = title;
+	WHILE parentID > 0 do
+
+
+		select c2.catTitle, c2.parentID into title, parentID from Categories as c2
+		where catID = parentID
+		limit 1;
+
+		set cats = CONCAT(title,'/',cats);
+	END WHILE;
+
+
+	return (cats);
+END */;;
+
+/*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE */;;
+DELIMITER ;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
