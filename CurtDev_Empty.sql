@@ -1195,7 +1195,7 @@ CREATE TABLE `IncludedPart` (
 -- ----------------------------
 DROP TABLE IF EXISTS `Inventory`;
 CREATE TABLE `Inventory` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `warehouseID` int(11) NOT NULL,
   `partID` int(11) NOT NULL,
   `available` int(11) NOT NULL,
