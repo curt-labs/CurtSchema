@@ -1191,6 +1191,23 @@ CREATE TABLE `IncludedPart` (
 ) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+--  Table structure for `Inventory`
+-- ----------------------------
+DROP TABLE IF EXISTS `Inventory`;
+CREATE TABLE `Inventory` (
+  `id` int(11) NOT NULL,
+  `warehouseID` int(11) NOT NULL,
+  `partID` int(11) NOT NULL,
+  `available` int(11) NOT NULL,
+  `dateUpdated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `partID` (`partID`),
+  KEY `warehouseID` (`warehouseID`),
+  CONSTRAINT `InventoryTopart` FOREIGN KEY (`partID`) REFERENCES `Part` (`partID`),
+  CONSTRAINT `InventoryToWarehouse` FOREIGN KEY (`warehouseID`) REFERENCES `Warehouses` (`id`)
+) ENGINE=InnoDB DEFAULT DEFAULT CHARSET=utf8;
+
+-- ----------------------------
 --  Table structure for `KioskOrderItems`
 -- ----------------------------
 DROP TABLE IF EXISTS `KioskOrderItems`;
@@ -2402,6 +2419,7 @@ DROP TABLE IF EXISTS `Warehouses`;
 CREATE TABLE `Warehouses` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
+  `code` varchar(10),
   `address` varchar(255) NOT NULL,
   `city` varchar(255) NOT NULL,
   `stateID` int(11) NOT NULL,
