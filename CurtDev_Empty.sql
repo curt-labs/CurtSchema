@@ -1601,6 +1601,7 @@ CREATE TABLE `PartAttribute` (
   `value` varchar(255) DEFAULT NULL,
   `field` varchar(255) DEFAULT NULL,
   `sort` int(11) NOT NULL DEFAULT '1',
+  `canFilter` tinyint NOT NULL DEFAULT 0,
   PRIMARY KEY (`pAttrID`),
   KEY `IX_PartAttribute_Part` (`partID`),
   CONSTRAINT `FK__PartAttri__partI__4C541A64` FOREIGN KEY (`partID`) REFERENCES `Part` (`partID`) ON DELETE NO ACTION ON UPDATE NO ACTION
