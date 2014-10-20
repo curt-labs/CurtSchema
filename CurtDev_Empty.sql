@@ -2434,6 +2434,30 @@ CREATE TABLE `Warehouses` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+-- ----------------------------
+--  Table structure for `WebinarSessions`
+-- ----------------------------
+CREATE TABLE `CurtDev`.`WebinarSessions` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	`name` varchar(255) NOT NULL,
+	`startTime` datetime NOT NULL,
+	`endTime` datetime NOT NULL,
+	PRIMARY KEY (`id`)
+) ENGINE=`InnoDB` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci COMMENT='';
+
+-- ----------------------------
+--  Table structure for `WebinarSessionSignups`
+-- ----------------------------
+CREATE TABLE `CurtDev`.`WebinarSessionSignups` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	`name` varchar(255) NOT NULL,
+	`email` varchar(255) NOT NULL,
+	`sessionID` int(11) NOT NULL,
+	PRIMARY KEY (`id`),
+	CONSTRAINT `SessionRef` FOREIGN KEY (`sessionID`) REFERENCES `CurtDev`.`WebinarSessions` (`id`)
+) ENGINE=`InnoDB` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci COMMENT='';
+
 -- ----------------------------
 --  Table structure for `WebPropNotes`
 -- ----------------------------
