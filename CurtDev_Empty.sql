@@ -2128,6 +2128,30 @@ CREATE TABLE `TechNews` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+--  Table structure for `TechSupport`
+-- ----------------------------
+DROP TABLE IF EXISTS `TechSupport`;
+
+CREATE TABLE `TechSupport` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `vehicleMake` varchar(100) NOT NULL DEFAULT '',
+  `vehicleModel` varchar(100) NOT NULL DEFAULT '',
+  `vehicleYear` int(4) NOT NULL,
+  `purchaseDate` date NOT NULL,
+  `purchasedFrom` varchar(255) NOT NULL DEFAULT '',
+  `dealerName` varchar(255) NOT NULL DEFAULT '',
+  `productCode` varchar(100) NOT NULL DEFAULT '',
+  `dateCode` varchar(100) NOT NULL DEFAULT '',
+  `issue` text NOT NULL,
+  `contactID` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `ContactID` (`contactID`),
+  CONSTRAINT `ContactID` FOREIGN KEY (`contactID`) REFERENCES `Contact` (`contactID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+-- ----------------------------
 --  Table structure for `TempCustomer`
 -- ----------------------------
 DROP TABLE IF EXISTS `TempCustomer`;
@@ -2432,6 +2456,23 @@ CREATE TABLE `Warehouses` (
   `longitude` double DEFAULT NULL,
   `latitude` double DEFAULT NULL,
   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Table structure for `Warranty`
+-- ----------------------------
+DROP TABLE IF EXISTS `Warranty`;
+
+CREATE TABLE `Warranty` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `partNumber` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `serialNumber` varchar(100) NOT NULL DEFAULT '',
+  `approved` tinyint(1) NOT NULL,
+  `contactID` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `ContactIDWarranty` (`contactID`),
+  CONSTRAINT `ContactIDWarranty` FOREIGN KEY (`contactID`) REFERENCES `Contact` (`contactID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
