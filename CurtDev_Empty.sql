@@ -579,6 +579,7 @@ DROP TABLE IF EXISTS `ContactType`;
 CREATE TABLE `ContactType` (
   `contactTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
+  `showOnWebsite` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`contactTypeID`)
 ) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
