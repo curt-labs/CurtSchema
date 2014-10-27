@@ -2480,6 +2480,7 @@ CREATE TABLE `Warranty` (
 -- ----------------------------
 --  Table structure for `WebinarSessions`
 -- ----------------------------
+DROP TABLE IF EXISTS `WebinarSessions`;
 CREATE TABLE `CurtDev`.`WebinarSessions` (
 	`id` int(11) NOT NULL AUTO_INCREMENT,
 	`name` varchar(255) NOT NULL,
@@ -2491,6 +2492,7 @@ CREATE TABLE `CurtDev`.`WebinarSessions` (
 -- ----------------------------
 --  Table structure for `WebinarSessionSignups`
 -- ----------------------------
+DROP TABLE IF EXISTS `WebinarSessionSigups`;
 CREATE TABLE `CurtDev`.`WebinarSessionSignups` (
 	`id` int(11) NOT NULL AUTO_INCREMENT,
 	`name` varchar(255) NOT NULL,
