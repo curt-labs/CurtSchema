@@ -104,14 +104,18 @@ CREATE TABLE `ApiModules` (
 -- ----------------------------
 --  Table structure for `ApplicationGuides`
 -- ----------------------------
+DROP TABLE IF EXISTS `ApplicationGuides`;
+
 CREATE TABLE `ApplicationGuides` (
   `ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `url` varchar(255) NOT NULL DEFAULT '',
   `websiteID` int(11) NOT NULL,
   `fileType` enum('pdf','xls','csv','zip','doc') DEFAULT NULL,
   `catID` int(11) NOT NULL,
+  `icon` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 -- ----------------------------
 --  Table structure for `AuthAccess`
