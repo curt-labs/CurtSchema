@@ -559,7 +559,7 @@ CREATE TABLE `Contact` (
   `postalcode` varchar(20) DEFAULT NULL,
   `country` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`contactID`)
-) ENGINE=MyISAM AUTO_INCREMENT=15147 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15147 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `ContactReceiver`
