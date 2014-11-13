@@ -643,6 +643,7 @@ CREATE TABLE `ContentType` (
   `cTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(255) DEFAULT NULL,
   `allowHTML` tinyint(1) NOT NULL DEFAULT '0',
+  `isPrivate` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`cTypeID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
