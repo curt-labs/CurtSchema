@@ -431,6 +431,7 @@ CREATE TABLE `Channel` (
   `dateModified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `title` varchar(255) DEFAULT NULL,
   `desc` text,
+  `duration` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=MyISAM AUTO_INCREMENT=191 DEFAULT CHARSET=utf8;
 
