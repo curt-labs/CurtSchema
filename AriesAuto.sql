@@ -113,6 +113,7 @@ CREATE TABLE `ApplicationGuides` (
   `fileType` enum('pdf','xls','csv','zip','doc') DEFAULT NULL,
   `catID` int(11) NOT NULL,
   `icon` varchar(255) NOT NULL DEFAULT '',
+  `brandID` int(11) NOT NULL DEFAULT 1,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -231,6 +232,7 @@ CREATE TABLE `BlogCategories` (
   `name` varchar(255) DEFAULT NULL,
   `slug` varchar(255) DEFAULT NULL,
   `active` tinyint(1) NOT NULL DEFAULT '1',
+  `brandID` int(11) NOT NULL DEFAULT 1,
   PRIMARY KEY (`blogCategoryID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
@@ -305,6 +307,7 @@ CREATE TABLE `BusinessClass` (
   `name` varchar(255) DEFAULT NULL,
   `sort` int(11) NOT NULL,
   `showOnWebsite` tinyint(1) NOT NULL DEFAULT '0',
+  `brandID` int(11) NOT NULL DEFAULT 1,
   PRIMARY KEY (`BusinessClassID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
@@ -369,6 +372,7 @@ CREATE TABLE `Categories` (
   `metaKeywords` text,
   `icon` varchar(255) DEFAULT NULL,
   `path` varchar(255) DEFAULT NULL,
+  `brandID` int(11) NOT NULL DEFAULT 1,
   PRIMARY KEY (`catID`),
   KEY `IX_Categories_ParentID` (`parentID`),
   KEY `IX_Categories_Sort` (`sort`)
@@ -556,6 +560,7 @@ CREATE TABLE `Contact` (
   `state` varchar(10) DEFAULT NULL,
   `postalcode` varchar(20) DEFAULT NULL,
   `country` varchar(255) DEFAULT NULL,
+  `brandID` int(11) NOT NULL DEFAULT 1,
   PRIMARY KEY (`contactID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=15147 DEFAULT CHARSET=utf8;
 
@@ -594,6 +599,7 @@ CREATE TABLE `ContactType` (
   `contactTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   `showOnWebsite` tinyint(1) NOT NULL DEFAULT '1',
+  `brandID` int(11) NOT NULL DEFAULT 1,
   PRIMARY KEY (`contactTypeID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
@@ -1038,6 +1044,7 @@ CREATE TABLE `FAQ` (
   `faqID` int(11) NOT NULL AUTO_INCREMENT,
   `question` varchar(500) DEFAULT NULL,
   `answer` longtext,
+  `brandID` int(11) NOT NULL DEFAULT 1,
   PRIMARY KEY (`faqID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
@@ -1584,6 +1591,7 @@ CREATE TABLE `Part` (
   `featured` tinyint(1) NOT NULL DEFAULT '0',
   `ACESPartTypeID` int(11) DEFAULT NULL,
   `replacedBy` int(11) DEFAULT NULL,
+  `brandID` int(11) NOT NULL DEFAULT 1,
   PRIMARY KEY (`partID`),
   KEY `IX_Part_status` (`status`),
   KEY `IX_Part_Class` (`classID`)
@@ -1951,6 +1959,7 @@ CREATE TABLE `Survey` (
   `date_modifed` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `userID` int(11) NOT NULL,
   `deleted` tinyint(1) NOT NULL DEFAULT '0',
+  `brandID` int(11) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
@@ -2138,6 +2147,7 @@ CREATE TABLE `TechSupport` (
   `dateCode` varchar(100) NOT NULL DEFAULT '',
   `issue` text NOT NULL,
   `contactID` int(11) NOT NULL,
+  `brandID` int(11) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   KEY `ContactID` (`contactID`),
   CONSTRAINT `ContactID` FOREIGN KEY (`contactID`) REFERENCES `Contact` (`contactID`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -2166,6 +2176,7 @@ CREATE TABLE `Testimonial` (
   `first_name` varchar(255) DEFAULT NULL,
   `last_name` varchar(255) DEFAULT NULL,
   `location` varchar(255) DEFAULT NULL,
+  `brandID` int(11) NOT NULL DEFAULT 1,
   PRIMARY KEY (`testimonialID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=utf8;
 
@@ -2211,6 +2222,7 @@ CREATE TABLE `Tweets` (
   `twitterUserID` varchar(500) NOT NULL,
   `screenName` varchar(100) NOT NULL,
   `profilePhoto` varchar(500) NOT NULL,
+  `brandID` int(11) NOT NULL DEFAULT 1,
   PRIMARY KEY (`tweetID`),
   UNIQUE KEY `tweetID_UNIQUE` (`tweetID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=755 DEFAULT CHARSET=utf8;
@@ -2368,6 +2380,7 @@ CREATE TABLE `Video` (
   `youtubeID` varchar(255) DEFAULT NULL,
   `watchpage` varchar(255) DEFAULT NULL,
   `screenshot` varchar(255) DEFAULT NULL,
+  `brandID` int(11) NOT NULL DEFAULT 1,
   PRIMARY KEY (`videoID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=utf8;
 
