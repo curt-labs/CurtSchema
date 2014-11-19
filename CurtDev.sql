@@ -2737,6 +2737,77 @@ CREATE TABLE `videoType` (
   PRIMARY KEY (`vTypeID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
+-- ----------------------------
+--  Table structure for `VideoNewToBrand`
+-- ----------------------------
+DROP TABLE IF EXISTS `VideoNewToBrand`;
+CREATE TABLE `VideoNewToBrand` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `videoID` int(11) NOT NULL,
+  `brandID` int(11) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+SET FOREIGN_KEY_CHECKS = 1;
+
+-- ----------------------------
+--  Table structure for `CompanyToBrand`
+-- ----------------------------
+DROP TABLE IF EXISTS `CompanyToBrand`;
+CREATE TABLE `CompanyToBrand` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `companyID` int(11) NOT NULL,
+  `brandID` int(11) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+--  Table structure for `NewsItemToBrand`
+-- ----------------------------
+DROP TABLE IF EXISTS `NewsItemToBrand`;
+CREATE TABLE `NewsItemToBrand` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `newsItemID` int(11) NOT NULL,
+  `brandID` int(11) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+--  Table structure for `CustomerToBrand`
+-- ----------------------------
+DROP TABLE IF EXISTS `CustomerToBrand`;
+CREATE TABLE `CustomerToBrand` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `cust_id` int(11) NOT NULL,
+  `brandID` int(11) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+-- ----------------------------
+--  Table structure for `WarehousesToBrand`
+-- ----------------------------
+DROP TABLE IF EXISTS `WarehousesToBrand`;
+CREATE TABLE `WarehousesToBrand` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `WarehouseID` int(11) NOT NULL,
+  `brandID` int(11) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+-- ----------------------------
+--  Table structure for `WebsiteToBrand`
+-- ----------------------------
+DROP TABLE IF EXISTS `WebsiteToBrand`;
+CREATE TABLE `WebsiteToBrand` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `WebsiteID` int(11) NOT NULL,
+  `brandID` int(11) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
 SET FOREIGN_KEY_CHECKS = 1;
 
 --
