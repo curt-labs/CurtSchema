@@ -1027,6 +1027,7 @@ CREATE TABLE `DealerTiers` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `tier` varchar(255) DEFAULT NULL,
   `sort` int(11) NOT NULL,
+  `brandID` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
@@ -1040,6 +1041,7 @@ CREATE TABLE `DealerTypes` (
   `online` tinyint(1) NOT NULL DEFAULT '0',
   `show` tinyint(1) NOT NULL DEFAULT '1',
   `label` varchar(300) DEFAULT NULL,
+  `brandID` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`dealer_type`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
