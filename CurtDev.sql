@@ -1119,6 +1119,7 @@ CREATE TABLE `ForumGroup` (
   `name` varchar(255) NOT NULL,
   `description` longtext,
   `createdDate` datetime NOT NULL,
+  `websiteID` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`forumGroupID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
