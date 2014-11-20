@@ -1288,6 +1288,7 @@ CREATE TABLE `LandingPage` (
   `conversionLabel` varchar(150) DEFAULT NULL,
   `newWindow` tinyint(1) NOT NULL DEFAULT '0',
   `menuPosition` varchar(15) NOT NULL DEFAULT 'top',
+  `websiteID` int(11) NOT NULL Default '1',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
@@ -2807,6 +2808,16 @@ CREATE TABLE `WebsiteToBrand` (
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- ----------------------------
+--  Table structure for `WebinarSessionsToBrand`
+-- ----------------------------
+DROP TABLE IF EXISTS `WebinarSessionsToBrand`;
+CREATE TABLE `WebinarSessionsToBrand` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `WebinarID` int(11) NOT NULL,
+  `brandID` int(11) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 SET FOREIGN_KEY_CHECKS = 1;

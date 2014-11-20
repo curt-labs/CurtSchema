@@ -1293,6 +1293,7 @@ CREATE TABLE `LandingPage` (
   `conversionLabel` varchar(150) DEFAULT NULL,
   `newWindow` tinyint(1) NOT NULL DEFAULT '0',
   `menuPosition` varchar(15) NOT NULL DEFAULT 'top',
+  `websiteID` int(11) NOT NULL Default '1',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
