@@ -2819,6 +2819,17 @@ CREATE TABLE `WebinarSessionsToBrand` (
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- ----------------------------
+--  Table structure for `ApiKeyToBrand`
+-- ----------------------------
+DROP TABLE IF EXISTS `ApiKeyToBrand`;
+CREATE TABLE `ApiKeyToBrand` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `keyID` int(11) NOT NULL,
+  `brandID` int(11) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=4096 DEFAULT CHARSET=latin1;
+
 
 SET FOREIGN_KEY_CHECKS = 1;
 
