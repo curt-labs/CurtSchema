@@ -113,7 +113,7 @@ CREATE TABLE `ApplicationGuides` (
   `ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `url` varchar(255) NOT NULL DEFAULT '',
   `websiteID` int(11) NOT NULL,
-  `fileType` enum('pdf','xls','csv','zip','doc') DEFAULT NULL,
+  `fileType` varchar(15) DEFAULT NULL,
   `catID` int(11) NOT NULL,
   `icon` varchar(255) NOT NULL DEFAULT '',
   `brandID` int(11) NOT NULL DEFAULT 1,
