@@ -310,6 +310,7 @@ CREATE TABLE `BusinessClass` (
   `name` varchar(255) DEFAULT NULL,
   `sort` int(11) NOT NULL,
   `showOnWebsite` tinyint(1) NOT NULL DEFAULT '0',
+  `brandID` int(11) NOT NULL,
   PRIMARY KEY (`BusinessClassID`)
 ) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
