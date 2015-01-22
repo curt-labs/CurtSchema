@@ -3098,7 +3098,6 @@ BEGIN
 	set cats = "";
 
 	select c1.parentID, c1.catTitle into parentID, title from Categories as c1
-	join CatPart as cp on c1.catID = cp.catID
 	where c1.catID = categoryID
 	limit 1;
 
