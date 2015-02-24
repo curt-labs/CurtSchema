@@ -2343,6 +2343,18 @@ CREATE TABLE `VehicleConfigAttribute` (
   CONSTRAINT `FK__VehicleCo__Vehic__1AD46138` FOREIGN KEY (`VehicleConfigID`) REFERENCES `VehicleConfig` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=46347 DEFAULT CHARSET=utf8;
 
+CREATE TABLE `VehicleInquiry` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `category` int(11) NOT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `vehicle` varchar(255) NOT NULL,
+  `message` varchar(255) DEFAULT NULL,
+  `date_added` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 -- ----------------------------
 --  Table structure for `VehiclePart`
 -- ----------------------------
