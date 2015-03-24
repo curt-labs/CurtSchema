@@ -74,12 +74,13 @@ CREATE TABLE `ApiKey` (
   `type_id` varchar(64) NOT NULL,
   `user_id` varchar(64) NOT NULL,
   `date_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  UNIQUE KEY `id` (`id`) USING BTREE,
+  UNIQUE KEY `id` (`id`),
   KEY `FK__ApiKey__type_id__5AEE1AF6` (`type_id`),
   KEY `FK__ApiKey__user_id__5BE23F2F` (`user_id`),
+  KEY `api_key` (`api_key`),
   CONSTRAINT `FK__ApiKey__type_id__5AEE1AF6` FOREIGN KEY (`type_id`) REFERENCES `ApiKeyType` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK__ApiKey__user_id__5BE23F2F` FOREIGN KEY (`user_id`) REFERENCES `CustomerUser` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4195 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8751 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 --  Table structure for `ApiKeyType`
@@ -339,8 +340,9 @@ CREATE TABLE `CartIntegration` (
   `custPartID` int(11) NOT NULL,
   `custID` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`referenceID`),
-  KEY `partID` (`partID`)
-) ENGINE=InnoDB AUTO_INCREMENT=80039 DEFAULT CHARSET=utf8;
+  KEY `partID` (`partID`),
+  KEY `custID` (`custID`)
+) ENGINE=InnoDB AUTO_INCREMENT=97340 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 --  Table structure for `CatPart`
@@ -379,11 +381,12 @@ CREATE TABLE `Categories` (
   `metaKeywords` text,
   `icon` varchar(255) DEFAULT NULL,
   `path` varchar(255) DEFAULT NULL,
-  `brandID` int(11) NOT NULL DEFAULT 1,
+  `brandID` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`catID`),
   KEY `IX_Categories_ParentID` (`parentID`),
-  KEY `IX_Categories_Sort` (`sort`)
-) ENGINE=InnoDB AUTO_INCREMENT=290 DEFAULT CHARSET=utf8;
+  KEY `IX_Categories_Sort` (`sort`),
+  KEY `brandID` (`brandID`)
+) ENGINE=InnoDB AUTO_INCREMENT=292 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 --  Table structure for `CategoryVideo`
@@ -410,8 +413,10 @@ CREATE TABLE `CdnFile` (
   `bucket` varchar(255) DEFAULT NULL,
   `objectName` varchar(255) DEFAULT NULL,
   `fileSize` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`ID`),
+  KEY `FK_CdnFile_CdnFileType` (`typeID`),
+  CONSTRAINT `FK_CdnFile_CdnFileType` FOREIGN KEY (`typeID`) REFERENCES `CdnFileType` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 --  Table structure for `CdnFileType`
@@ -440,8 +445,10 @@ CREATE TABLE `Channel` (
   `title` varchar(255) DEFAULT NULL,
   `desc` text,
   `duration` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=191 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`ID`),
+  KEY `FK_Channel_ChannelType` (`typeID`),
+  CONSTRAINT `FK_Channel_ChannelType` FOREIGN KEY (`typeID`) REFERENCES `ChannelType` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=242 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 --  Table structure for `ChannelType`
@@ -530,8 +537,9 @@ CREATE TABLE `ConfigAttribute` (
   `value` varchar(255) NOT NULL,
   PRIMARY KEY (`ID`),
   KEY `AAIA_ConfigAttribute_IX` (`ConfigAttributeTypeID`,`parentID`),
+  KEY `value` (`value`),
   CONSTRAINT `FK__ConfigAtt__Confi__07D43958` FOREIGN KEY (`ConfigAttributeTypeID`) REFERENCES `ConfigAttributeType` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=378 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=396 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 --  Table structure for `ConfigAttributeType`
@@ -544,8 +552,9 @@ CREATE TABLE `ConfigAttributeType` (
   `sort` int(11) NOT NULL,
   PRIMARY KEY (`ID`),
   KEY `FK__ConfigAtt__AcesT__030F843B` (`AcesTypeID`),
+  KEY `name` (`name`),
   CONSTRAINT `FK__ConfigAtt__AcesT__030F843B` FOREIGN KEY (`AcesTypeID`) REFERENCES `AcesType` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 --  Table structure for `Contact`
@@ -652,8 +661,9 @@ CREATE TABLE `ContentType` (
   `type` varchar(255) DEFAULT NULL,
   `allowHTML` tinyint(1) NOT NULL DEFAULT '0',
   `isPrivate` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`cTypeID`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`cTypeID`),
+  KEY `type` (`type`)
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 --  Table structure for `Content_Revisions`
@@ -959,8 +969,9 @@ CREATE TABLE `CustomerPricing` (
   `sale_start` date DEFAULT NULL,
   `sale_end` date DEFAULT NULL,
   PRIMARY KEY (`cust_price_id`),
-  KEY `partID` (`partID`)
-) ENGINE=InnoDB AUTO_INCREMENT=489577 DEFAULT CHARSET=utf8;
+  KEY `partID` (`partID`),
+  KEY `cust_id` (`cust_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=545621 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 --  Table structure for `CustomerReport`
@@ -1611,7 +1622,7 @@ DROP TABLE IF EXISTS `Part`;
 CREATE TABLE `Part` (
   `partID` int(11) NOT NULL,
   `status` int(11) NOT NULL,
-  `dateModified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `dateModified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `dateAdded` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `shortDesc` varchar(255) DEFAULT NULL,
   `oldPartNumber` varchar(100) DEFAULT NULL,
@@ -1620,11 +1631,14 @@ CREATE TABLE `Part` (
   `featured` tinyint(1) NOT NULL DEFAULT '0',
   `ACESPartTypeID` int(11) DEFAULT NULL,
   `replacedBy` int(11) DEFAULT NULL,
-  `brandID` int(11) NOT NULL DEFAULT 1,
+  `brandID` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`partID`),
   KEY `IX_Part_status` (`status`),
-  KEY `IX_Part_Class` (`classID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `IX_Part_Class` (`classID`),
+  KEY `shortDesc` (`shortDesc`),
+  KEY `shortDesc_2` (`shortDesc`),
+  KEY `brandID` (`brandID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 --  Table structure for `PartAttribute`
@@ -1730,11 +1744,12 @@ CREATE TABLE `PartPackage` (
   KEY `weightUnit_idx` (`weightUOM`),
   KEY `packageUnit_idx` (`packageUOM`),
   KEY `typeUnit_FK_idx` (`typeID`),
+  KEY `partID` (`partID`),
   CONSTRAINT `dimUinit_FK` FOREIGN KEY (`dimensionUOM`) REFERENCES `UnitOfMeasure` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `packageUnit_FK` FOREIGN KEY (`packageUOM`) REFERENCES `UnitOfMeasure` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `typeUnit_FK` FOREIGN KEY (`typeID`) REFERENCES `PackageType` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `weightUnit_FK` FOREIGN KEY (`weightUOM`) REFERENCES `UnitOfMeasure` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4828 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5051 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 --  Table structure for `PartVideo`
@@ -1800,8 +1815,9 @@ CREATE TABLE `Price` (
   `dateModified` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`priceID`),
   KEY `IX_Price_Part` (`partID`),
+  KEY `priceType` (`priceType`),
   CONSTRAINT `FK__Price__partID__0A514CDD` FOREIGN KEY (`partID`) REFERENCES `Part` (`partID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=31021 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=31689 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 --  Table structure for `Region`
@@ -2443,8 +2459,12 @@ CREATE TABLE `VideoCdnFiles` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `cdnID` int(11) NOT NULL,
   `videoID` int(11) NOT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`ID`),
+  KEY `FK_VideoCdnFiles_CdnFiles` (`cdnID`),
+  KEY `FK_VideoCdnFiles_VideoNew` (`videoID`),
+  CONSTRAINT `FK_VideoCdnFiles_CdnFiles` FOREIGN KEY (`cdnID`) REFERENCES `CdnFile` (`ID`),
+  CONSTRAINT `FK_VideoCdnFiles_VideoNew` FOREIGN KEY (`videoID`) REFERENCES `VideoNew` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 --  Table structure for `VideoChannels`
@@ -2454,8 +2474,12 @@ CREATE TABLE `VideoChannels` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `videoID` int(11) NOT NULL,
   `channelID` int(11) NOT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=191 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`ID`),
+  KEY `FK_VideoChannels_Channels` (`channelID`),
+  KEY `FK_VideoChannels_Video` (`videoID`),
+  CONSTRAINT `FK_VideoChannels_Channels` FOREIGN KEY (`channelID`) REFERENCES `Channel` (`ID`),
+  CONSTRAINT `FK_VideoChannels_Video` FOREIGN KEY (`videoID`) REFERENCES `VideoNew` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=242 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 --  Table structure for `VideoJoin`
@@ -2468,8 +2492,12 @@ CREATE TABLE `VideoJoin` (
   `catID` int(11) NOT NULL,
   `websiteID` int(11) NOT NULL DEFAULT '0',
   `isPrimary` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=6384 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`ID`),
+  KEY `FK_VideoJoin_Part` (`videoID`),
+  KEY `partID` (`partID`),
+  KEY `catID` (`catID`),
+  CONSTRAINT `FK_VideoJoin_Part` FOREIGN KEY (`videoID`) REFERENCES `VideoNew` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=6507 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 --  Table structure for `VideoNew`
@@ -2682,8 +2710,9 @@ CREATE TABLE `vcdb_Make` (
   `AAIAMakeID` int(11) DEFAULT NULL,
   `MakeName` varchar(50) NOT NULL,
   PRIMARY KEY (`ID`),
-  KEY `AAIA_Make_IX` (`AAIAMakeID`)
-) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8;
+  KEY `AAIA_Make_IX` (`AAIAMakeID`),
+  KEY `MakeName` (`MakeName`)
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 --  Table structure for `vcdb_Model`
@@ -2695,8 +2724,9 @@ CREATE TABLE `vcdb_Model` (
   `ModelName` varchar(100) DEFAULT NULL,
   `VehicleTypeID` int(11) NOT NULL,
   PRIMARY KEY (`ID`),
-  KEY `AAIA_Model_IX` (`AAIAModelID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3904 DEFAULT CHARSET=utf8;
+  KEY `AAIA_Model_IX` (`AAIAModelID`),
+  KEY `ModelName` (`ModelName`)
+) ENGINE=InnoDB AUTO_INCREMENT=3915 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 --  Table structure for `vcdb_Vehicle`
@@ -2761,8 +2791,12 @@ CREATE TABLE `VideoNewToBrand` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `videoID` int(11) NOT NULL,
   `brandID` int(11) NOT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`ID`),
+  KEY `FK_VideoNewToBrand_Video` (`videoID`),
+  KEY `FK_VideoNewToBrand_Brand` (`brandID`),
+  CONSTRAINT `FK_VideoNewToBrand_Brand` FOREIGN KEY (`brandID`) REFERENCES `Brand` (`ID`),
+  CONSTRAINT `FK_VideoNewToBrand_Video` FOREIGN KEY (`videoID`) REFERENCES `VideoNew` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=1509 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 SET FOREIGN_KEY_CHECKS = 1;
 
@@ -2842,8 +2876,12 @@ CREATE TABLE `ApiKeyToBrand` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `keyID` int(11) NOT NULL,
   `brandID` int(11) NOT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4096 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`ID`),
+  KEY `FK_ApiKeyToBrand_ApiKey` (`keyID`),
+  KEY `FK_ApiKeyToBrand_Brand` (`brandID`),
+  CONSTRAINT `FK_ApiKeyToBrand_ApiKey` FOREIGN KEY (`keyID`) REFERENCES `ApiKey` (`id`),
+  CONSTRAINT `FK_ApiKeyToBrand_Brand` FOREIGN KEY (`brandID`) REFERENCES `Brand` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=25444 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 SET FOREIGN_KEY_CHECKS = 1;
 

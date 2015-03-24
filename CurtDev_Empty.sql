@@ -14,13 +14,15 @@
  Date: 09/18/2014 11:07:06 AM
 */
 
-CREATE DATABASE IF NOT EXISTS CurtDev_Empty;
+CREATE DATABASE IF NOT EXISTS CurtDev;
+
+USE CurtDev;
 
 SET NAMES utf8;
 SET FOREIGN_KEY_CHECKS = 0;
 
 GRANT USAGE ON *.* TO curtDuser2 IDENTIFIED BY 'eC0mm3rc3';
-GRANT ALL PRIVILEGES ON CurtDev_Empty.* TO curtDuser2;
+GRANT ALL PRIVILEGES ON CurtDev.* TO curtDuser2;
 
 -- ----------------------------
 --  Table structure for `AcesType`
@@ -72,12 +74,13 @@ CREATE TABLE `ApiKey` (
   `type_id` varchar(64) NOT NULL,
   `user_id` varchar(64) NOT NULL,
   `date_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  UNIQUE KEY `id` (`id`) USING BTREE,
+  UNIQUE KEY `id` (`id`),
   KEY `FK__ApiKey__type_id__5AEE1AF6` (`type_id`),
   KEY `FK__ApiKey__user_id__5BE23F2F` (`user_id`),
+  KEY `api_key` (`api_key`),
   CONSTRAINT `FK__ApiKey__type_id__5AEE1AF6` FOREIGN KEY (`type_id`) REFERENCES `ApiKeyType` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK__ApiKey__user_id__5BE23F2F` FOREIGN KEY (`user_id`) REFERENCES `CustomerUser` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=MyISAM AUTO_INCREMENT=4195 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=8751 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 --  Table structure for `ApiKeyType`
@@ -118,7 +121,8 @@ CREATE TABLE `ApplicationGuides` (
   `icon` varchar(255) NOT NULL DEFAULT '',
   `brandID` int(11) NOT NULL DEFAULT 1,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
 
 
 -- ----------------------------
@@ -272,6 +276,7 @@ CREATE TABLE `BlogPosts` (
   `keywords` longtext,
   `active` tinyint(1) NOT NULL DEFAULT '1',
   `thumbnail` varchar(255) NOT NULL,
+  `brandID` int(11) NOT NULL DEFAULT 1,
   PRIMARY KEY (`blogPostID`),
   KEY `BlogPostAuthorID` (`userID`)
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
@@ -310,7 +315,7 @@ CREATE TABLE `BusinessClass` (
   `name` varchar(255) DEFAULT NULL,
   `sort` int(11) NOT NULL,
   `showOnWebsite` tinyint(1) NOT NULL DEFAULT '0',
-  `brandID` int(11) NOT NULL,
+  `brandID` int(11) NOT NULL DEFAULT 1,
   PRIMARY KEY (`BusinessClassID`)
 ) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
@@ -335,8 +340,9 @@ CREATE TABLE `CartIntegration` (
   `custPartID` int(11) NOT NULL,
   `custID` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`referenceID`),
-  KEY `partID` (`partID`)
-) ENGINE=MyISAM AUTO_INCREMENT=80039 DEFAULT CHARSET=utf8;
+  KEY `partID` (`partID`),
+  KEY `custID` (`custID`)
+) ENGINE=MyISAM AUTO_INCREMENT=97340 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 --  Table structure for `CatPart`
@@ -375,11 +381,12 @@ CREATE TABLE `Categories` (
   `metaKeywords` text,
   `icon` varchar(255) DEFAULT NULL,
   `path` varchar(255) DEFAULT NULL,
-  `brandID` int(11) NOT NULL DEFAULT 1,
+  `brandID` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`catID`),
   KEY `IX_Categories_ParentID` (`parentID`),
-  KEY `IX_Categories_Sort` (`sort`)
-) ENGINE=MyISAM AUTO_INCREMENT=290 DEFAULT CHARSET=utf8;
+  KEY `IX_Categories_Sort` (`sort`),
+  KEY `brandID` (`brandID`)
+) ENGINE=MyISAM AUTO_INCREMENT=292 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 --  Table structure for `CategoryVideo`
@@ -406,8 +413,10 @@ CREATE TABLE `CdnFile` (
   `bucket` varchar(255) DEFAULT NULL,
   `objectName` varchar(255) DEFAULT NULL,
   `fileSize` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`ID`),
+  KEY `FK_CdnFile_CdnFileType` (`typeID`),
+  CONSTRAINT `FK_CdnFile_CdnFileType` FOREIGN KEY (`typeID`) REFERENCES `CdnFileType` (`ID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 --  Table structure for `CdnFileType`
@@ -436,8 +445,10 @@ CREATE TABLE `Channel` (
   `title` varchar(255) DEFAULT NULL,
   `desc` text,
   `duration` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=191 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`ID`),
+  KEY `FK_Channel_ChannelType` (`typeID`),
+  CONSTRAINT `FK_Channel_ChannelType` FOREIGN KEY (`typeID`) REFERENCES `ChannelType` (`ID`)
+) ENGINE=MyISAM AUTO_INCREMENT=242 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 --  Table structure for `ChannelType`
@@ -526,8 +537,9 @@ CREATE TABLE `ConfigAttribute` (
   `value` varchar(255) NOT NULL,
   PRIMARY KEY (`ID`),
   KEY `AAIA_ConfigAttribute_IX` (`ConfigAttributeTypeID`,`parentID`),
+  KEY `value` (`value`),
   CONSTRAINT `FK__ConfigAtt__Confi__07D43958` FOREIGN KEY (`ConfigAttributeTypeID`) REFERENCES `ConfigAttributeType` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=MyISAM AUTO_INCREMENT=378 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=396 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 --  Table structure for `ConfigAttributeType`
@@ -540,8 +552,9 @@ CREATE TABLE `ConfigAttributeType` (
   `sort` int(11) NOT NULL,
   PRIMARY KEY (`ID`),
   KEY `FK__ConfigAtt__AcesT__030F843B` (`AcesTypeID`),
+  KEY `name` (`name`),
   CONSTRAINT `FK__ConfigAtt__AcesT__030F843B` FOREIGN KEY (`AcesTypeID`) REFERENCES `AcesType` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=MyISAM AUTO_INCREMENT=77 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=77 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 --  Table structure for `Contact`
@@ -565,7 +578,7 @@ CREATE TABLE `Contact` (
   `country` varchar(255) DEFAULT NULL,
   `brandID` int(11) NOT NULL DEFAULT 1,
   PRIMARY KEY (`contactID`)
-) ENGINE=InnoDB AUTO_INCREMENT=15147 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=15147 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `ContactReceiver`
@@ -648,8 +661,9 @@ CREATE TABLE `ContentType` (
   `type` varchar(255) DEFAULT NULL,
   `allowHTML` tinyint(1) NOT NULL DEFAULT '0',
   `isPrivate` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`cTypeID`)
-) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`cTypeID`),
+  KEY `type` (`type`)
+) ENGINE=MyISAM AUTO_INCREMENT=44 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 --  Table structure for `Content_Revisions`
@@ -955,8 +969,9 @@ CREATE TABLE `CustomerPricing` (
   `sale_start` date DEFAULT NULL,
   `sale_end` date DEFAULT NULL,
   PRIMARY KEY (`cust_price_id`),
-  KEY `partID` (`partID`)
-) ENGINE=MyISAM AUTO_INCREMENT=489577 DEFAULT CHARSET=utf8;
+  KEY `partID` (`partID`),
+  KEY `cust_id` (`cust_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=545621 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 --  Table structure for `CustomerReport`
@@ -1234,7 +1249,7 @@ CREATE TABLE `Inventory` (
   KEY `warehouseID` (`warehouseID`),
   CONSTRAINT `InventoryTopart` FOREIGN KEY (`partID`) REFERENCES `Part` (`partID`),
   CONSTRAINT `InventoryToWarehouse` FOREIGN KEY (`warehouseID`) REFERENCES `Warehouses` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `KioskOrderItems`
@@ -1607,7 +1622,7 @@ DROP TABLE IF EXISTS `Part`;
 CREATE TABLE `Part` (
   `partID` int(11) NOT NULL,
   `status` int(11) NOT NULL,
-  `dateModified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `dateModified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `dateAdded` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `shortDesc` varchar(255) DEFAULT NULL,
   `oldPartNumber` varchar(100) DEFAULT NULL,
@@ -1616,11 +1631,14 @@ CREATE TABLE `Part` (
   `featured` tinyint(1) NOT NULL DEFAULT '0',
   `ACESPartTypeID` int(11) DEFAULT NULL,
   `replacedBy` int(11) DEFAULT NULL,
-  `brandID` int(11) NOT NULL DEFAULT 1,
+  `brandID` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`partID`),
   KEY `IX_Part_status` (`status`),
-  KEY `IX_Part_Class` (`classID`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  KEY `IX_Part_Class` (`classID`),
+  KEY `shortDesc` (`shortDesc`),
+  KEY `shortDesc_2` (`shortDesc`),
+  KEY `brandID` (`brandID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 --  Table structure for `PartAttribute`
@@ -1702,8 +1720,7 @@ CREATE TABLE `PartIndex` (
   `partIndexID` bigint(20) NOT NULL AUTO_INCREMENT,
   `partID` int(11) NOT NULL,
   `partIndex` longtext,
-  PRIMARY KEY (`partIndexID`),
-  FULLTEXT KEY `partIndex` (`partIndex`)
+  PRIMARY KEY (`partIndexID`)
 ) ENGINE=MyISAM AUTO_INCREMENT=84240 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -1727,11 +1744,12 @@ CREATE TABLE `PartPackage` (
   KEY `weightUnit_idx` (`weightUOM`),
   KEY `packageUnit_idx` (`packageUOM`),
   KEY `typeUnit_FK_idx` (`typeID`),
+  KEY `partID` (`partID`),
   CONSTRAINT `dimUinit_FK` FOREIGN KEY (`dimensionUOM`) REFERENCES `UnitOfMeasure` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `packageUnit_FK` FOREIGN KEY (`packageUOM`) REFERENCES `UnitOfMeasure` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `typeUnit_FK` FOREIGN KEY (`typeID`) REFERENCES `PackageType` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `weightUnit_FK` FOREIGN KEY (`weightUOM`) REFERENCES `UnitOfMeasure` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=MyISAM AUTO_INCREMENT=4828 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=5051 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 --  Table structure for `PartVideo`
@@ -1797,8 +1815,9 @@ CREATE TABLE `Price` (
   `dateModified` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`priceID`),
   KEY `IX_Price_Part` (`partID`),
+  KEY `priceType` (`priceType`),
   CONSTRAINT `FK__Price__partID__0A514CDD` FOREIGN KEY (`partID`) REFERENCES `Part` (`partID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=MyISAM AUTO_INCREMENT=31021 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=31689 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 --  Table structure for `Region`
@@ -2180,8 +2199,7 @@ CREATE TABLE `TechSupport` (
   PRIMARY KEY (`id`),
   KEY `ContactID` (`contactID`),
   CONSTRAINT `ContactID` FOREIGN KEY (`contactID`) REFERENCES `Contact` (`contactID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
 -- ----------------------------
@@ -2441,8 +2459,12 @@ CREATE TABLE `VideoCdnFiles` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `cdnID` int(11) NOT NULL,
   `videoID` int(11) NOT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`ID`),
+  KEY `FK_VideoCdnFiles_CdnFiles` (`cdnID`),
+  KEY `FK_VideoCdnFiles_VideoNew` (`videoID`),
+  CONSTRAINT `FK_VideoCdnFiles_CdnFiles` FOREIGN KEY (`cdnID`) REFERENCES `CdnFile` (`ID`),
+  CONSTRAINT `FK_VideoCdnFiles_VideoNew` FOREIGN KEY (`videoID`) REFERENCES `VideoNew` (`ID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 --  Table structure for `VideoChannels`
@@ -2452,8 +2474,12 @@ CREATE TABLE `VideoChannels` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `videoID` int(11) NOT NULL,
   `channelID` int(11) NOT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=191 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`ID`),
+  KEY `FK_VideoChannels_Channels` (`channelID`),
+  KEY `FK_VideoChannels_Video` (`videoID`),
+  CONSTRAINT `FK_VideoChannels_Channels` FOREIGN KEY (`channelID`) REFERENCES `Channel` (`ID`),
+  CONSTRAINT `FK_VideoChannels_Video` FOREIGN KEY (`videoID`) REFERENCES `VideoNew` (`ID`)
+) ENGINE=MyISAM AUTO_INCREMENT=242 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 --  Table structure for `VideoJoin`
@@ -2466,8 +2492,12 @@ CREATE TABLE `VideoJoin` (
   `catID` int(11) NOT NULL,
   `websiteID` int(11) NOT NULL DEFAULT '0',
   `isPrimary` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=6384 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`ID`),
+  KEY `FK_VideoJoin_Part` (`videoID`),
+  KEY `partID` (`partID`),
+  KEY `catID` (`catID`),
+  CONSTRAINT `FK_VideoJoin_Part` FOREIGN KEY (`videoID`) REFERENCES `VideoNew` (`ID`)
+) ENGINE=MyISAM AUTO_INCREMENT=6507 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 --  Table structure for `VideoNew`
@@ -2505,11 +2535,12 @@ CREATE TABLE `Warehouses` (
   `longitude` double DEFAULT NULL,
   `latitude` double DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Table structure for `Warranty`
+--  Table structure for `Warehouses`
 -- ----------------------------
+
 DROP TABLE IF EXISTS `Warranty`;
 
 CREATE TABLE `Warranty` (
@@ -2522,33 +2553,32 @@ CREATE TABLE `Warranty` (
   PRIMARY KEY (`id`),
   KEY `ContactIDWarranty` (`contactID`),
   CONSTRAINT `ContactIDWarranty` FOREIGN KEY (`contactID`) REFERENCES `Contact` (`contactID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `WebinarSessions`
 -- ----------------------------
 DROP TABLE IF EXISTS `WebinarSessions`;
 CREATE TABLE `WebinarSessions` (
-	`id` int(11) NOT NULL AUTO_INCREMENT,
-	`name` varchar(255) NOT NULL,
-	`startTime` datetime NOT NULL,
-	`endTime` datetime NOT NULL,
-	PRIMARY KEY (`id`)
-) ENGINE=`InnoDB` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci COMMENT='';
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `startTime` datetime NOT NULL,
+  `endTime` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=`MyISAM` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci COMMENT='';
 
 -- ----------------------------
 --  Table structure for `WebinarSessionSignups`
 -- ----------------------------
-DROP TABLE IF EXISTS `WebinarSessionSigups`;
+DROP TABLE IF EXISTS `WebinarSessionSignups`;
 CREATE TABLE `WebinarSessionSignups` (
-	`id` int(11) NOT NULL AUTO_INCREMENT,
-	`name` varchar(255) NOT NULL,
-	`email` varchar(255) NOT NULL,
-	`sessionID` int(11) NOT NULL,
-	PRIMARY KEY (`id`),
-	CONSTRAINT `SessionRef` FOREIGN KEY (`sessionID`) REFERENCES `CurtDev`.`WebinarSessions` (`id`)
-) ENGINE=`InnoDB` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci COMMENT='';
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `sessionID` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `SessionRef` FOREIGN KEY (`sessionID`) REFERENCES `CurtDev`.`WebinarSessions` (`id`)
+) ENGINE=`MyISAM` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci COMMENT='';
 
 -- ----------------------------
 --  Table structure for `WebPropNotes`
@@ -2680,8 +2710,9 @@ CREATE TABLE `vcdb_Make` (
   `AAIAMakeID` int(11) DEFAULT NULL,
   `MakeName` varchar(50) NOT NULL,
   PRIMARY KEY (`ID`),
-  KEY `AAIA_Make_IX` (`AAIAMakeID`)
-) ENGINE=MyISAM AUTO_INCREMENT=58 DEFAULT CHARSET=utf8;
+  KEY `AAIA_Make_IX` (`AAIAMakeID`),
+  KEY `MakeName` (`MakeName`)
+) ENGINE=MyISAM AUTO_INCREMENT=58 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 --  Table structure for `vcdb_Model`
@@ -2693,8 +2724,9 @@ CREATE TABLE `vcdb_Model` (
   `ModelName` varchar(100) DEFAULT NULL,
   `VehicleTypeID` int(11) NOT NULL,
   PRIMARY KEY (`ID`),
-  KEY `AAIA_Model_IX` (`AAIAModelID`)
-) ENGINE=MyISAM AUTO_INCREMENT=3904 DEFAULT CHARSET=utf8;
+  KEY `AAIA_Model_IX` (`AAIAModelID`),
+  KEY `ModelName` (`ModelName`)
+) ENGINE=MyISAM AUTO_INCREMENT=3915 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 --  Table structure for `vcdb_Vehicle`
@@ -2759,8 +2791,12 @@ CREATE TABLE `VideoNewToBrand` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `videoID` int(11) NOT NULL,
   `brandID` int(11) NOT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`ID`),
+  KEY `FK_VideoNewToBrand_Video` (`videoID`),
+  KEY `FK_VideoNewToBrand_Brand` (`brandID`),
+  CONSTRAINT `FK_VideoNewToBrand_Brand` FOREIGN KEY (`brandID`) REFERENCES `Brand` (`ID`),
+  CONSTRAINT `FK_VideoNewToBrand_Video` FOREIGN KEY (`videoID`) REFERENCES `VideoNew` (`ID`)
+) ENGINE=MyISAM AUTO_INCREMENT=1509 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 SET FOREIGN_KEY_CHECKS = 1;
 
@@ -2773,7 +2809,7 @@ CREATE TABLE `CompanyToBrand` (
   `companyID` int(11) NOT NULL,
   `brandID` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 --  Table structure for `NewsItemToBrand`
@@ -2784,7 +2820,7 @@ CREATE TABLE `NewsItemToBrand` (
   `newsItemID` int(11) NOT NULL,
   `brandID` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 --  Table structure for `CustomerToBrand`
@@ -2795,7 +2831,7 @@ CREATE TABLE `CustomerToBrand` (
   `cust_id` int(11) NOT NULL,
   `brandID` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 
 -- ----------------------------
@@ -2807,7 +2843,7 @@ CREATE TABLE `WarehousesToBrand` (
   `WarehouseID` int(11) NOT NULL,
   `brandID` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 
 -- ----------------------------
@@ -2819,7 +2855,7 @@ CREATE TABLE `WebsiteToBrand` (
   `WebsiteID` int(11) NOT NULL,
   `brandID` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 --  Table structure for `WebinarSessionsToBrand`
@@ -2830,7 +2866,7 @@ CREATE TABLE `WebinarSessionsToBrand` (
   `WebinarID` int(11) NOT NULL,
   `brandID` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 --  Table structure for `ApiKeyToBrand`
@@ -2840,9 +2876,12 @@ CREATE TABLE `ApiKeyToBrand` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `keyID` int(11) NOT NULL,
   `brandID` int(11) NOT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4096 DEFAULT CHARSET=latin1;
-
+  PRIMARY KEY (`ID`),
+  KEY `FK_ApiKeyToBrand_ApiKey` (`keyID`),
+  KEY `FK_ApiKeyToBrand_Brand` (`brandID`),
+  CONSTRAINT `FK_ApiKeyToBrand_ApiKey` FOREIGN KEY (`keyID`) REFERENCES `ApiKey` (`id`),
+  CONSTRAINT `FK_ApiKeyToBrand_Brand` FOREIGN KEY (`brandID`) REFERENCES `Brand` (`ID`)
+) ENGINE=MyISAM AUTO_INCREMENT=25444 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 SET FOREIGN_KEY_CHECKS = 1;
 
@@ -2866,61 +2905,61 @@ DELIMITER ;;
 /*!50003 CREATE*/ /*!50020 DEFINER=`curtDuser2`@`%`*/ /*!50003 PROCEDURE `active_parts_proc`()
 BEGIN
 
-	DROP TEMPORARY TABLE IF EXISTS temp;
-	CREATE TEMPORARY TABLE IF NOT EXISTS temp (
-		tempID INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
-		partID INTEGER NULL,
-		AcesID INTEGER NULL,
-		shortDesc VARCHAR(500) NULL,
-		listDesc LONGTEXT NULL,
-		jobberPrice DECIMAL(12,2) NULL,
-		listPrice DECIMAL(12,2) NULL,
-		height DECIMAL(12,2) NULL,
-		width DECIMAL(12,2) NULL,
-		length DECIMAL(12,2) NULL,
-		weight DECIMAL(12,2) NULL
-	);
+  DROP TEMPORARY TABLE IF EXISTS temp;
+  CREATE TEMPORARY TABLE IF NOT EXISTS temp (
+    tempID INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    partID INTEGER NULL,
+    AcesID INTEGER NULL,
+    shortDesc VARCHAR(500) NULL,
+    listDesc LONGTEXT NULL,
+    jobberPrice DECIMAL(12,2) NULL,
+    listPrice DECIMAL(12,2) NULL,
+    height DECIMAL(12,2) NULL,
+    width DECIMAL(12,2) NULL,
+    length DECIMAL(12,2) NULL,
+    weight DECIMAL(12,2) NULL
+  );
 
-	INSERT INTO temp (partID)
-	SELECT p.partID
-	FROM Part p
-	WHERE p.status = 800;
+  INSERT INTO temp (partID)
+  SELECT p.partID
+  FROM Part p
+  WHERE p.status = 800;
 
-	UPDATE temp as t, Part as pt
-	SET t.AcesID = pt.ACESPartTypeID
-	WHERE t.partID = pt.partID
-	AND	pt.status = 800;
+  UPDATE temp as t, Part as pt
+  SET t.AcesID = pt.ACESPartTypeID
+  WHERE t.partID = pt.partID
+  AND pt.status = 800;
 
-	UPDATE temp as t, Part as pt
-	SET t.shortDesc = pt.shortDesc
-	WHERE t.partID = pt.partID
-	AND	pt.status = 800;
+  UPDATE temp as t, Part as pt
+  SET t.shortDesc = pt.shortDesc
+  WHERE t.partID = pt.partID
+  AND pt.status = 800;
 
-	UPDATE temp as t, Content as c, ContentBridge as cb
-	SET t.listDesc = c.text
-	WHERE t.partID = cb.partID
-	AND	  cb.contentID = c.contentID
-	AND c.cTypeID = 11;
+  UPDATE temp as t, Content as c, ContentBridge as cb
+  SET t.listDesc = c.text
+  WHERE t.partID = cb.partID
+  AND   cb.contentID = c.contentID
+  AND c.cTypeID = 11;
 
-	UPDATE temp as t, Price as pr
-	SET t.jobberPrice = pr.price
-	WHERE t.partID = pr.partID
-	AND	pr.priceType = "Jobber";
+  UPDATE temp as t, Price as pr
+  SET t.jobberPrice = pr.price
+  WHERE t.partID = pr.partID
+  AND pr.priceType = "Jobber";
 
-	UPDATE temp as t, Price as pr
-	SET t.listPrice = pr.price
-	WHERE t.partID = pr.partID
-	AND	pr.priceType = "List";
+  UPDATE temp as t, Price as pr
+  SET t.listPrice = pr.price
+  WHERE t.partID = pr.partID
+  AND pr.priceType = "List";
 
-	UPDATE temp as t, PartPackage pk
-	SET t.length = pk.length,
-		t.width = pk.width,
-		t.height = pk.height,
-		t.weight = pk.weight
-	WHERE t.partID = pk.partID;
+  UPDATE temp as t, PartPackage pk
+  SET t.length = pk.length,
+    t.width = pk.width,
+    t.height = pk.height,
+    t.weight = pk.weight
+  WHERE t.partID = pk.partID;
 
-	SELECT * FROM temp;
-	DROP TEMPORARY TABLE IF EXISTS temp;
+  SELECT * FROM temp;
+  DROP TEMPORARY TABLE IF EXISTS temp;
 END */;;
 
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE */;;
@@ -2933,117 +2972,117 @@ END */;;
 /*!50003 CREATE*/ /*!50020 DEFINER=`curtDuser2`@`%`*/ /*!50003 PROCEDURE `global_indust_proc`()
 BEGIN
 
-	DECLARE cnt INT DEFAULT 1;
-	DECLARE catName VARCHAR(50);
+  DECLARE cnt INT DEFAULT 1;
+  DECLARE catName VARCHAR(50);
 
-	DROP TEMPORARY TABLE IF EXISTS temp;
-	CREATE TEMPORARY TABLE IF NOT EXISTS temp (
-		tempID INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
-		partID INTEGER NULL,
-		shortDesc VARCHAR(500) NULL,
-		listDesc LONGTEXT NULL,
-		listPrice DECIMAL(12,2) NULL,
-		UPC VARCHAR(255) NULL,
-		length DECIMAL(12,2) NULL,
-		width DECIMAL(12,2) NULL,
-		height DECIMAL(12,2) NULL,
-		weight DECIMAL(12,2) NULL,
-		parentCategory VARCHAR(50) NULL DEFAULT "",
-		material VARCHAR(50) NULL DEFAULT "",
-		finish VARCHAR(50) NULL DEFAULT "",
-		ballDiameter VARCHAR(50) NULL DEFAULT "",
-		hitchDrop VARCHAR(50) NULL DEFAULT "",
-		rise VARCHAR(50) NULL DEFAULT "",
-		ballHole VARCHAR(50) NULL DEFAULT "",
-		shankLength VARCHAR(50) NULL DEFAULT "",
-		shankDiameter VARCHAR(50) NULL DEFAULT "",
-		recTubeSize VARCHAR(50) NULL DEFAULT ""
-	);
+  DROP TEMPORARY TABLE IF EXISTS temp;
+  CREATE TEMPORARY TABLE IF NOT EXISTS temp (
+    tempID INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    partID INTEGER NULL,
+    shortDesc VARCHAR(500) NULL,
+    listDesc LONGTEXT NULL,
+    listPrice DECIMAL(12,2) NULL,
+    UPC VARCHAR(255) NULL,
+    length DECIMAL(12,2) NULL,
+    width DECIMAL(12,2) NULL,
+    height DECIMAL(12,2) NULL,
+    weight DECIMAL(12,2) NULL,
+    parentCategory VARCHAR(50) NULL DEFAULT "",
+    material VARCHAR(50) NULL DEFAULT "",
+    finish VARCHAR(50) NULL DEFAULT "",
+    ballDiameter VARCHAR(50) NULL DEFAULT "",
+    hitchDrop VARCHAR(50) NULL DEFAULT "",
+    rise VARCHAR(50) NULL DEFAULT "",
+    ballHole VARCHAR(50) NULL DEFAULT "",
+    shankLength VARCHAR(50) NULL DEFAULT "",
+    shankDiameter VARCHAR(50) NULL DEFAULT "",
+    recTubeSize VARCHAR(50) NULL DEFAULT ""
+  );
 
-	INSERT INTO temp (partID)
-	SELECT p.partID
-	FROM Part p
-	WHERE p.status = 800;
+  INSERT INTO temp (partID)
+  SELECT p.partID
+  FROM Part p
+  WHERE p.status = 800;
 
-	UPDATE temp as t, Part as pt
-	SET t.shortDesc = pt.shortDesc
-	WHERE t.partID = pt.partID
-	AND	pt.status = 800;
+  UPDATE temp as t, Part as pt
+  SET t.shortDesc = pt.shortDesc
+  WHERE t.partID = pt.partID
+  AND pt.status = 800;
 
-	UPDATE temp as t, Content as c, ContentBridge as cb
-	SET t.listDesc = c.text
-	WHERE t.partID = cb.partID
-	AND	  cb.contentID = c.contentID
-	AND c.cTypeID = 11;
+  UPDATE temp as t, Content as c, ContentBridge as cb
+  SET t.listDesc = c.text
+  WHERE t.partID = cb.partID
+  AND   cb.contentID = c.contentID
+  AND c.cTypeID = 11;
 
-	UPDATE temp as t, Price as pr
-	SET t.listPRice = pr.price
-	WHERE t.partID = pr.partID
-	AND	pr.priceType = "List";
+  UPDATE temp as t, Price as pr
+  SET t.listPRice = pr.price
+  WHERE t.partID = pr.partID
+  AND pr.priceType = "List";
 
-	UPDATE temp as t, PartAttribute pa
-	SET t.UPC = pa.value
-	WHERE t.partID = pa.partID
-	AND pa.field = "UPC";
+  UPDATE temp as t, PartAttribute pa
+  SET t.UPC = pa.value
+  WHERE t.partID = pa.partID
+  AND pa.field = "UPC";
 
-	UPDATE temp as t, PartPackage pk
-	SET t.length = pk.length,
-		t.width = pk.width,
-		t.height = pk.height,
-		t.weight = pk.weight
-	WHERE t.partID = pk.partID;
+  UPDATE temp as t, PartPackage pk
+  SET t.length = pk.length,
+    t.width = pk.width,
+    t.height = pk.height,
+    t.weight = pk.weight
+  WHERE t.partID = pk.partID;
 
-	UPDATE temp as t, PartAttribute pa
-	SET t.material = pa.value
-	WHERE t.partID = pa.partID
-	AND pa.field = "Material";
+  UPDATE temp as t, PartAttribute pa
+  SET t.material = pa.value
+  WHERE t.partID = pa.partID
+  AND pa.field = "Material";
 
-	UPDATE temp as t, PartAttribute pa
-	SET t.finish = pa.value
-	WHERE t.partID = pa.partID
-	AND pa.field = "Finish";
+  UPDATE temp as t, PartAttribute pa
+  SET t.finish = pa.value
+  WHERE t.partID = pa.partID
+  AND pa.field = "Finish";
 
-	UPDATE temp as t, PartAttribute pa
-	SET t.ballDiameter = pa.value
-	WHERE t.partID = pa.partID
-	AND pa.field = "Ball Diameter";
+  UPDATE temp as t, PartAttribute pa
+  SET t.ballDiameter = pa.value
+  WHERE t.partID = pa.partID
+  AND pa.field = "Ball Diameter";
 
-	UPDATE temp as t, PartAttribute pa
-	SET t.hitchDrop = pa.value
-	WHERE t.partID = pa.partID
-	AND pa.field = "Drop";
+  UPDATE temp as t, PartAttribute pa
+  SET t.hitchDrop = pa.value
+  WHERE t.partID = pa.partID
+  AND pa.field = "Drop";
 
-	UPDATE temp as t, PartAttribute pa
-	SET t.rise = pa.value
-	WHERE t.partID = pa.partID
-	AND pa.field = "Rise";
+  UPDATE temp as t, PartAttribute pa
+  SET t.rise = pa.value
+  WHERE t.partID = pa.partID
+  AND pa.field = "Rise";
 
-	UPDATE temp as t, PartAttribute pa
-	SET t.ballHole = pa.value
-	WHERE t.partID = pa.partID
-	AND pa.field = "Ball Hole";
+  UPDATE temp as t, PartAttribute pa
+  SET t.ballHole = pa.value
+  WHERE t.partID = pa.partID
+  AND pa.field = "Ball Hole";
 
-	UPDATE temp as t, PartAttribute pa
-	SET t.shankLength = pa.value
-	WHERE t.partID = pa.partID
-	AND pa.field = "Shank Length";
+  UPDATE temp as t, PartAttribute pa
+  SET t.shankLength = pa.value
+  WHERE t.partID = pa.partID
+  AND pa.field = "Shank Length";
 
-	UPDATE temp as t, PartAttribute pa
-	SET t.shankDiameter = pa.value
-	WHERE t.partID = pa.partID
-	AND pa.field = "Shank Diameter";
+  UPDATE temp as t, PartAttribute pa
+  SET t.shankDiameter = pa.value
+  WHERE t.partID = pa.partID
+  AND pa.field = "Shank Diameter";
 
-	UPDATE temp as t, PartAttribute pa
-	SET t.recTubeSize = pa.value
-	WHERE t.partID = pa.partID
-	AND pa.field = "Receiver Tube Size";
+  UPDATE temp as t, PartAttribute pa
+  SET t.recTubeSize = pa.value
+  WHERE t.partID = pa.partID
+  AND pa.field = "Receiver Tube Size";
 
-	UPDATE temp as t, Part as p
-	SET t.parentCategory = (SELECT parent_cat_func(p.partID))
-	WHERE t.partID = p.partID;
+  UPDATE temp as t, Part as p
+  SET t.parentCategory = (SELECT parent_cat_func(p.partID))
+  WHERE t.partID = p.partID;
 
-	SELECT * FROM temp;
-	DROP TEMPORARY TABLE IF EXISTS temp;
+  SELECT * FROM temp;
+  DROP TEMPORARY TABLE IF EXISTS temp;
 
 END */;;
 
@@ -3065,32 +3104,32 @@ DELIMITER ;;
     DETERMINISTIC
 BEGIN
 
-	declare IDS varchar(255);
-	declare tmpIDS varchar(255);
-	declare currentIDS varchar(255);
-	declare catCount int(11);
-	set @IDS = '';
-	set @tmpIDS = '';
-	set @currentIDS = '';
-	set @catCount = 0;
+  declare IDS varchar(255);
+  declare tmpIDS varchar(255);
+  declare currentIDS varchar(255);
+  declare catCount int(11);
+  set @IDS = '';
+  set @tmpIDS = '';
+  set @currentIDS = '';
+  set @catCount = 0;
 
-	select group_concat(distinct c1.catID), count(catID) into @tmpIDS, @catCount from Categories as c1
-	where parentID = id || catID = id;
+  select group_concat(distinct c1.catID), count(catID) into @tmpIDS, @catCount from Categories as c1
+  where parentID = id || catID = id;
 
-	set @IDS = @tmpIDS;
-	while @catCount != 0 do
+  set @IDS = @tmpIDS;
+  while @catCount != 0 do
 
-		set @currentIDS = @tmpIDS;
-		select group_concat(distinct catID), count(distinct catID) into @tmpIDS, @catCount from Categories
-		where FIND_IN_SET(parentID, @currentIDS);
+    set @currentIDS = @tmpIDS;
+    select group_concat(distinct catID), count(distinct catID) into @tmpIDS, @catCount from Categories
+    where FIND_IN_SET(parentID, @currentIDS);
 
-		if @catCount != 0 then
-			set @IDS = CONCAT(@tmpIDS, ',',@IDS);
-		end if;
+    if @catCount != 0 then
+      set @IDS = CONCAT(@tmpIDS, ',',@IDS);
+    end if;
 
-	end while;
+  end while;
 
-	return @IDS;
+  return @IDS;
 END */;;
 
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE */;;
@@ -3103,30 +3142,30 @@ END */;;
 /*!50003 CREATE*/ /*!50020 DEFINER=`curtDuser2`@`%`*/ /*!50003 FUNCTION `categoryLoop`(categoryID int) RETURNS varchar(255) CHARSET latin1 COLLATE latin1_general_ci
 BEGIN
 
-	declare cats varchar(255);
-	declare parentID int;
+  declare cats varchar(255);
+  declare parentID int;
 
-	declare title varchar(255);
-	set cats = "";
+  declare title varchar(255);
+  set cats = "";
 
-	select c1.parentID, c1.catTitle into parentID, title from Categories as c1
-	where c1.catID = categoryID
-	limit 1;
-
-
-	set cats = title;
-	WHILE parentID > 0 do
+  select c1.parentID, c1.catTitle into parentID, title from Categories as c1
+  where c1.catID = categoryID
+  limit 1;
 
 
-		select c2.catTitle, c2.parentID into title, parentID from Categories as c2
-		where catID = parentID
-		limit 1;
-
-		set cats = CONCAT(title,'/',cats);
-	END WHILE;
+  set cats = title;
+  WHILE parentID > 0 do
 
 
-	return (cats);
+    select c2.catTitle, c2.parentID into title, parentID from Categories as c2
+    where catID = parentID
+    limit 1;
+
+    set cats = CONCAT(title,'/',cats);
+  END WHILE;
+
+
+  return (cats);
 END */;;
 
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE */;;
@@ -3139,37 +3178,37 @@ END */;;
 /*!50003 CREATE*/ /*!50020 DEFINER=`curtDuser2`@`%`*/ /*!50003 FUNCTION `parent_cat_func`(partNum INT) RETURNS varchar(100) CHARSET latin1 COLLATE latin1_general_ci
 BEGIN
 
-	DECLARE cid INT;
-	DECLARE pid INT;
-	DECLARE catName VARCHAR(100);
+  DECLARE cid INT;
+  DECLARE pid INT;
+  DECLARE catName VARCHAR(100);
 
-	-- Seed the variables - BAS 7/24/14
-	SELECT 	MIN(c.catID), c.parentID
-	INTO	cid, pid
-	FROM	Categories c
-	JOIN 	CatPart cp
-	ON		c.catID = cp.catID
-	WHERE	cp.partID = partNum;
+  -- Seed the variables - BAS 7/24/14
+  SELECT  MIN(c.catID), c.parentID
+  INTO  cid, pid
+  FROM  Categories c
+  JOIN  CatPart cp
+  ON    c.catID = cp.catID
+  WHERE cp.partID = partNum;
 
-	-- Reduce to parentID - BAS 7/25/14
-	numLoop: LOOP
-		IF pid = 0 THEN
-			LEAVE numLoop;
-		ELSE
-			SELECT 	c.catID, c.parentID
-			INTO	cid, pid
-			FROM	Categories c
-			WHERE	c.catID = pid;
-			ITERATE numLoop;
-		END IF;
-	END LOOP numLoop;
+  -- Reduce to parentID - BAS 7/25/14
+  numLoop: LOOP
+    IF pid = 0 THEN
+      LEAVE numLoop;
+    ELSE
+      SELECT  c.catID, c.parentID
+      INTO  cid, pid
+      FROM  Categories c
+      WHERE c.catID = pid;
+      ITERATE numLoop;
+    END IF;
+  END LOOP numLoop;
 
-	SELECT 	c.catTitle
-	INTO	catName
-	FROM 	Categories c
-	WHERE	catID = cid;
+  SELECT  c.catTitle
+  INTO  catName
+  FROM  Categories c
+  WHERE catID = cid;
 
-	return catName;
+  return catName;
 END */;;
 
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE */;;
@@ -3181,31 +3220,31 @@ END */;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION"*/;;
 /*!50003 CREATE*/ /*!50020 DEFINER=`curtDuser2`@`%`*/ /*!50003 FUNCTION `partCategoryLoop`(partID int) RETURNS varchar(255) CHARSET latin1 COLLATE latin1_general_ci
 BEGIN
-	declare cats varchar(255);
-	declare parentID int;
+  declare cats varchar(255);
+  declare parentID int;
 
-	declare title varchar(255);
-	set cats = "";
+  declare title varchar(255);
+  set cats = "";
 
-	select c1.parentID, c1.catTitle into parentID, title from Categories as c1
-	join CatPart as cp on c1.catID = cp.catID
-	where cp.partID = partID
-	limit 1;
-
-
-	set cats = title;
-	WHILE parentID > 0 do
+  select c1.parentID, c1.catTitle into parentID, title from Categories as c1
+  join CatPart as cp on c1.catID = cp.catID
+  where cp.partID = partID
+  limit 1;
 
 
-		select c2.catTitle, c2.parentID into title, parentID from Categories as c2
-		where catID = parentID
-		limit 1;
-
-		set cats = CONCAT(title,'/',cats);
-	END WHILE;
+  set cats = title;
+  WHILE parentID > 0 do
 
 
-	return (cats);
+    select c2.catTitle, c2.parentID into title, parentID from Categories as c2
+    where catID = parentID
+    limit 1;
+
+    set cats = CONCAT(title,'/',cats);
+  END WHILE;
+
+
+  return (cats);
 END */;;
 
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE */;;
