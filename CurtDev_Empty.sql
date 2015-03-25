@@ -2359,6 +2359,11 @@ CREATE TABLE `VehicleConfigAttribute` (
   CONSTRAINT `FK__VehicleCo__Vehic__1AD46138` FOREIGN KEY (`VehicleConfigID`) REFERENCES `VehicleConfig` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=MyISAM AUTO_INCREMENT=46347 DEFAULT CHARSET=utf8;
 
+
+-- ----------------------------
+--  Table structure for `VehicleInquiry`
+-- ----------------------------
+DROP TABLE IF EXISTS `VehicleInquiry`;
 CREATE TABLE `VehicleInquiry` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
