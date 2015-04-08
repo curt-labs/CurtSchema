@@ -1688,6 +1688,7 @@ CREATE TABLE `PartAttribute` (
   `field` varchar(255) DEFAULT NULL,
   `sort` int(11) NOT NULL DEFAULT '1',
   `canFilter` tinyint(4) DEFAULT '0',
+  `public` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`pAttrID`),
   KEY `IX_PartAttribute_Part` (`partID`),
   FULLTEXT KEY `value` (`value`),
