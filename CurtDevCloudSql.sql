@@ -688,6 +688,22 @@ CREATE TABLE `Country` (
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+--  Table structure for `CronTasks`
+-- ----------------------------
+DROP TABLE IF EXISTS `CronTasks`;
+CREATE TABLE `CronTasks` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) DEFAULT NULL,
+  `FormData` blob,
+  `Schedule` varchar(255) DEFAULT NULL,
+  `Type` int(11) NOT NULL,
+  `CustomerID` int(11) NOT NULL,
+  `Active` tinyint(1) NOT NULL DEFAULT '0',
+  `Started` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
 --  Table structure for `CustUserWebProperties`
 -- ----------------------------
 DROP TABLE IF EXISTS `CustUserWebProperties`;
