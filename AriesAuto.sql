@@ -1607,6 +1607,7 @@ CREATE TABLE `PartAttribute` (
   `value` varchar(255) DEFAULT NULL,
   `field` varchar(255) DEFAULT NULL,
   `sort` int(11) NOT NULL DEFAULT '1',
+  `public` tinyint NOT NULL DEFAULT '0',
   PRIMARY KEY (`pAttrID`),
   KEY `IX_PartAttribute_Part` (`partID`),
   CONSTRAINT `FK__PartAttri__partI__4C541A64` FOREIGN KEY (`partID`) REFERENCES `Part` (`partID`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -2309,6 +2310,18 @@ CREATE TABLE `VehicleConfigAttribute` (
   CONSTRAINT `FK__VehicleCo__Attri__19E03CFF` FOREIGN KEY (`AttributeID`) REFERENCES `ConfigAttribute` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK__VehicleCo__Vehic__1AD46138` FOREIGN KEY (`VehicleConfigID`) REFERENCES `VehicleConfig` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=46347 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `VehicleInquiry` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `category` int(11) NOT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `vehicle` varchar(255) NOT NULL,
+  `message` varchar(255) DEFAULT NULL,
+  `date_added` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `VehiclePart`
