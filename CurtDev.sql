@@ -707,7 +707,7 @@ CREATE TABLE `CronTasks` (
   `FormData` blob,
   `Schedule` varchar(255) DEFAULT NULL,
   `Type` int(11) NOT NULL,
-  `CustomerID` int(11) NOT NULL,
+  `UserID` varchar(64) NOT NULL,
   `Active` tinyint(1) NOT NULL DEFAULT '0',
   `Started` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`ID`)
