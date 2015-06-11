@@ -725,6 +725,7 @@ CREATE TABLE `CronTasks` (
   `UserID` varchar(64) NOT NULL,
   `Active` tinyint(1) NOT NULL DEFAULT '0',
   `Started` tinyint(1) NOT NULL DEFAULT '0',
+  `LastRunDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
