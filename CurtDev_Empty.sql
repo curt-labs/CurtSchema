@@ -711,6 +711,7 @@ CREATE TABLE `CronTasks` (
   `Active` tinyint(1) NOT NULL DEFAULT '0',
   `Started` tinyint(1) NOT NULL DEFAULT '0',
   `LastRunDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `IsDeleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
