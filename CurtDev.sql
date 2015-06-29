@@ -289,6 +289,11 @@ CREATE TABLE `Brand` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `code` varchar(255) NOT NULL,
+  `logo` varchar(255),
+  `logoAlt` varchar(255),
+  `formalName` varchar(255),
+  `longName` varchar(255),
+  `primaryColor` varchar(10),
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
