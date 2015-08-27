@@ -298,6 +298,7 @@ CREATE TABLE `Brand` (
   `formalName` varchar(255),
   `longName` varchar(255),
   `primaryColor` varchar(10),
+  `autocareID` varchar(4),
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
